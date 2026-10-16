@@ -1,1 +1,60 @@
-The requested file reference is not currently visible. Use files.search or files.list to rediscover the file, then retry with a returned ref_id or file_id.
+name: DRI editorial drafts
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: Generate a draft now
+        type: boolean
+        default: true
+  schedule:
+    - cron: '35 5,6 * * 0-5'
+permissions:
+  contents: write
+concurrency:
+  group: dri-editorial
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+      BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
+      OPENAI_MODEL: gpt-6.1
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: pip install -r dri/requirements.txt
+      - name: Verify API credentials exist
+        run: |
+          test -n "$OPENAI_API_KEY" || { echo 'Missing OPENAI_API_KEY'; exit 1; }
+          test -n "$BUFFER_API_KEY" || { echo 'Missing BUFFER_API_KEY'; exit 1; }
+      - name: Generate and fact-check editorial
+        run: python dri/bot.py generate ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Host the licensed editorial cover
+        run: |
+          if [ -n "$(git status --porcelain dri/assets/)" ]; then
+            git config user.name "dri-editorial-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add dri/assets/
+            git commit -m "chore(dri): add editorial cover"
+            git push
+          fi
+      - name: Create Buffer draft, never publish
+        run: python dri/bot.py buffer ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
+      - name: Retain source audit for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dri-review-${{ github.run_id }}
+          path: |
+            dri/out/*.json
+            dri/out/*.txt
+            dri/out/*.buffer-id
+          if-no-files-found: ignore
+          retention-days: 30
