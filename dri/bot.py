@@ -29,7 +29,7 @@ BUFFER_ENDPOINT = "https://api.buffer.com"
 COMMONS_ENDPOINT = "https://commons.wikimedia.org/w/api.php"
 TZ = ZoneInfo("Europe/Copenhagen")
 UA = "DRI-EditorialBot/1.0 (personal editorial use; contact via repository owner)"
-MODEL = os.environ.get("OPENAI_MODEL", "gpt-6.1")
+MODEL = os.environ.get("OPENAI_MODEL", "gpt-6.1-sol")
 TRUSTED_DOMAINS = (
     "reuters.com", "ft.com", "bloomberg.com", "apnews.com", "wsj.com",
     "ecb.europa.eu", "bankofengland.co.uk", "federalreserve.gov",
