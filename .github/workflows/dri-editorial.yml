@@ -1,60 +1,85 @@
-name: DRI editorial drafts
+name: DRI – free ChatGPT to Buffer drafts
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'dri/incoming/*.json'
   workflow_dispatch:
     inputs:
-      force:
-        description: Generate a draft now
-        type: boolean
-        default: true
-  schedule:
-    - cron: '35 5,6 * * 0-5'
+      incoming_file:
+        description: 'Path to already researched JSON, e.g. dri/incoming/2026-10-18.json'
+        required: true
+        type: string
+
 permissions:
   contents: write
+
 concurrency:
-  group: dri-editorial
+  group: dri-buffer-draft
   cancel-in-progress: false
+
 jobs:
-  prepare:
+  draft:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
-    env:
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
-      BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
-      OPENAI_MODEL: gpt-6.1-sol
-      PYTHONUNBUFFERED: '1'
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
+      - name: Install free image and HTTP dependencies
         run: pip install -r dri/requirements.txt
-      - name: Verify API credentials exist
+      - name: Detect editorial file and require Buffer credentials
+        id: input
+        env:
+          INPUT_FILE: ${{ inputs.incoming_file }}
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+        shell: bash
         run: |
-          test -n "$OPENAI_API_KEY" || { echo 'Missing OPENAI_API_KEY'; exit 1; }
-          test -n "$BUFFER_API_KEY" || { echo 'Missing BUFFER_API_KEY'; exit 1; }
-      - name: Generate and fact-check editorial
-        run: python dri/bot.py generate ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
-      - name: Host the licensed editorial cover
+          set -eu
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            file="$INPUT_FILE"
+          else
+            file="$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^dri/incoming/[0-9]{4}-[0-9]{2}-[0-9]{2}\.json$' | head -n 1 || true)"
+          fi
+          test -n "$file" && test -f "$file" || { echo 'No new editorial file'; exit 1; }
+          test -n "$BUFFER_API_KEY" || { echo 'Connect Buffer first: BUFFER_API_KEY GitHub secret missing'; exit 1; }
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+      - name: Create portrait cover and validate cited draft
+        env:
+          PYTHONPATH: dri
+        run: python dri/from_chatgpt.py prepare "${{ steps.input.outputs.file }}"
+      - name: Save cover to GitHub
+        shell: bash
         run: |
-          if [ -n "$(git status --porcelain dri/assets/)" ]; then
-            git config user.name "dri-editorial-bot"
+          if [ -n "$(git status --porcelain -- dri/assets/)" ]; then
+            git config user.name "dri-bot"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add dri/assets/
-            git commit -m "chore(dri): add editorial cover"
+            git commit -m 'chore(dri): add portrait cover'
             git push
           fi
-      - name: Create Buffer draft, never publish
-        run: python dri/bot.py buffer ${{ github.event_name == 'workflow_dispatch' && '--force' || '' }}
-      - name: Retain source audit for review
+      - name: Create private Buffer draft, NEVER publish
+        env:
+          PYTHONPATH: dri
+          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
+          BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
+        run: python dri/from_chatgpt.py deliver "${{ steps.input.outputs.file }}"
+      - name: Remember draft ID (prevent duplicates)
+        shell: bash
+        run: |
+          git add dri/state/
+          git commit -m 'chore(dri): record Buffer draft id'
+          git push
+      - name: Retain fact-check record
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dri-review-${{ github.run_id }}
+          name: dri-editorial-${{ github.run_id }}
           path: |
             dri/out/*.json
             dri/out/*.txt
-            dri/out/*.buffer-id
           if-no-files-found: ignore
           retention-days: 30
