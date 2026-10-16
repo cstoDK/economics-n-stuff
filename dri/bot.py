@@ -29,7 +29,7 @@ BUFFER_ENDPOINT = "https://api.buffer.com"
 COMMONS_ENDPOINT = "https://commons.wikimedia.org/w/api.php"
 TZ = ZoneInfo("Europe/Copenhagen")
 UA = "DRI-EditorialBot/1.0 (personal editorial use; contact via repository owner)"
-MODEL = os.environ.get("OPENAI_MODEL", "gpt-6.1-sol")
+MODEL = os.environ.get("OPENAI_MODEL", "gpt-6.1")
 TRUSTED_DOMAINS = (
     "reuters.com", "ft.com", "bloomberg.com", "apnews.com", "wsj.com",
     "ecb.europa.eu", "bankofengland.co.uk", "federalreserve.gov",
@@ -327,7 +327,7 @@ def draft_in_buffer(text: str, public_image_url: str | None):
       }
     }'''
     inp = {"text": text, "channelId": channel, "schedulingType": "automatic",
-           "mode": "addToQueue", "saveToDraft": True, "aiAssisted": True}
+           "mode": "addToQueue", "saveToDraft": True, "needsApproval": False, "assets": [], "aiAssisted": True}
     if public_image_url:
         inp["assets"] = [{"image": {"url": public_image_url}}]
     data = buffer_graphql(query, {"input": inp})
