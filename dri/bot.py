@@ -327,7 +327,7 @@ def draft_in_buffer(text: str, public_image_url: str | None):
       }
     }'''
     inp = {"text": text, "channelId": channel, "schedulingType": "automatic",
-           "mode": "addToQueue", "saveToDraft": True, "needsApproval": False, "assets": [], "aiAssisted": True}
+           "mode": "addToQueue", "saveToDraft": True, "needsApproval": False, "assets": [], "aiAssisted": True, "metadata": {"facebook": {"type": "post"}}}
     if public_image_url:
         inp["assets"] = [{"image": {"url": public_image_url}}]
     data = buffer_graphql(query, {"input": inp})
