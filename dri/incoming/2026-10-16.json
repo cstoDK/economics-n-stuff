@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-16",
+  "mode": "daily",
+  "approved": true,
+  "facebook_text": "🧪 TEKNISK TEST, MÅ IKKE PUBLICERES\n\n3 TING INVESTORER SKAL VIDE I DAG\n\nDette opslag er udelukkende en test af den automatiske overførsel fra ChatGPT via GitHub til Buffer. Det er ikke et nyhedsopslag, indeholder ingen aktuelle markedsanbefalinger og er ikke tiltænkt offentliggørelse. Formålet er at kontrollere, at teksten, billedet og de tilhørende oplysninger bliver samlet i en kladde, som kan redigeres, før nogen beslutter at offentliggøre noget.\n\n1. Test af tekst og formatering\nFørste kontrolpunkt er, om danske bogstaver, overskrifter, linjeskift og længere afsnit bliver korrekt overført. Hvis dette afsnit fremstår læseligt i Buffers kladdevisning, fungerer tekstoverførslen som forventet. Her fremsættes ingen påstand om dagens økonomiske udvikling.\n\n2. Test af billedet\nAndet kontrolpunkt er, om et portrætbillede i formatet 1080 × 1350 pixel er blevet tilknyttet opslaget. Billedet er enten en original grafisk testforside eller et lovligt krediteret arkivfoto. Det er ikke dokumentation for en begivenhed i dag.\n\n3. Test af redaktionel godkendelse\nTredje kontrolpunkt er det vigtigste. Dette opslag skal forblive en KLADDE i Buffer. Hverken GitHub, ChatGPT eller Buffer må offentliggøre opslaget automatisk. Det skal kræve en aktiv beslutning fra den ansvarlige redaktør.\n\nDAGENS VIGTIGSTE POINTE\n\nEn velfungerende automatisering er ikke kun hurtig. Den skal også undgå at publicere indhold uden menneskelig godkendelse. Hvis du læser dette i Buffer under kladder og ser et billede sammen med teksten, er den tekniske test bestået. Dette er fortsat kun en test, og teksten må ikke kopieres eller publiceres som et rigtigt indlæg.",
+  "sources": [
+    {
+      "headline": "Teknisk kontrol af Nationalbankens kildehenvisning",
+      "urls": [
+        "https://www.nationalbanken.dk/"
+      ],
+      "event_date": "2026-10-16",
+      "source_date": "2026-10-16",
+      "core_fact": "Kun teknisk kildehenvisningstest, ikke markedsnyhed."
+    },
+    {
+      "headline": "Teknisk kontrol af ECB-kildehenvisning",
+      "urls": [
+        "https://www.ecb.europa.eu/"
+      ],
+      "event_date": "2026-10-16",
+      "source_date": "2026-10-16",
+      "core_fact": "Kun teknisk kildehenvisningstest, ikke markedsnyhed."
+    },
+    {
+      "headline": "Teknisk kontrol af Danmarks Statistiks kildehenvisning",
+      "urls": [
+        "https://www.dst.dk/"
+      ],
+      "event_date": "2026-10-16",
+      "source_date": "2026-10-16",
+      "core_fact": "Kun teknisk kildehenvisningstest, ikke markedsnyhed."
+    }
+  ],
+  "photo_subject": "European Central Bank building",
+  "cover_title": "TEKNISK TEST",
+  "cover_subtitle": "Kun en kladde. Må ikke offentliggøres."
+}
