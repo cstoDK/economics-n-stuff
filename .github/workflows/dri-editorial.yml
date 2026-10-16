@@ -70,9 +70,11 @@ jobs:
       - name: Remember draft ID (prevent duplicates)
         shell: bash
         run: |
-          git add dri/state/
-          git commit -m 'chore(dri): record Buffer draft id'
-          git push
+          if [ -n "$(git status --porcelain -- dri/state/)" ]; then
+            git add dri/state/
+            git commit -m 'chore(dri): record Buffer draft id'
+            git push
+          fi
       - name: Retain fact-check record
         if: always()
         uses: actions/upload-artifact@v4
