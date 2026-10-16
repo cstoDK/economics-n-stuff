@@ -1,25 +1,46 @@
-# Den Rationelle Investor: redaktionsbot
+# DRI: Gratis AI-redaktion
 
-Automatisk research, faktatjek, en vertikal 1080×1350-forside og en **ikke-publiceret** Buffer-kladde. Kører mandag-fredag og søndag cirka kl. 07.35 dansk tid.
+Dette setup bruger **ChatGPT Plus-opgaven, som brugeren allerede betaler for**, til research. Ingen OpenAI API-nøgle og ingen ekstra udgift til AI-research.
 
-## Opsætning
+## Kæden
 
-1. Opret Buffer-konto på https://buffer.com og forbind Facebook-siden Den Rationelle Investor.
-2. Opret en personlig API-nøgle i Buffer: https://publish.buffer.com/settings/api
-3. Opret en separat OpenAI API-nøgle på https://platform.openai.com/api-keys. ChatGPT-abonnement giver ikke i sig selv API-kredit.
-4. Indsæt nøglerne som GitHub Actions-secrets **BUFFER_API_KEY** og **OPENAI_API_KEY** her: https://github.com/cstoDK/economics-n-stuff/settings/secrets/actions . Del dem aldrig i chat eller kode.
-5. Gå til https://github.com/cstoDK/economics-n-stuff/actions/workflows/dri-editorial.yml og vælg Run workflow, når secrets er tilføjet. Hvis din kanal ikke genkendes entydigt, skal BUFFER_CHANNEL_ID tilføjes som en tredje secret.
+1. ChatGPT Scheduled Task "DRI: Gratis AI-redaktion" skriver et research- og faktakontrolleret opslag.
+2. Den samme ChatGPT-opgave opretter via allerede tilsluttet GitHub-app `dri/incoming/YYYY-MM-DD.json`.
+3. Denne GitHub Actions-workflow starter ved en ny JSON-fil. Koden validerer kildehenvisninger og datoer, finder et frit licenseret arkivfoto hos Wikimedia Commons eller bygger en tydeligt illustreret forside på 1080 × 1350 px.
+4. Den færdige billedfil ligger på GitHub, og et opslag med billedet oprettes som **Buffer draft**, aldrig automatisk publiceret.
+5. Redaktøren finpudser og publicerer selv fra Buffer.
 
-Forsiden er et licenseret *arkivfoto* fra Wikimedia Commons med rettighedsangivelse eller en tydeligt original grafisk illustration. Et arkivfoto må ikke omtales som et billede fra dagens nyhed.
+## De eneste brugertrin, der mangler
 
-Et uafhængigt andet AI-kald gennemgår fakta og kilder. Hvis kvalitetskontrollen afviser opslaget, oprettes ingen Buffer-kladde. **Publicering foretages kun manuelt fra Buffer.**
+- Opret en gratis konto på https://buffer.com (gratisplan med op til 3 kanaler, ubegrænsede kladder).
+- Forbind Facebook-siden Den Rationelle Investor i Buffer.
+- Gå til https://publish.buffer.com/settings/api og opret den gratis personlige **Buffer API-nøgle**.
+- Gå til https://github.com/cstoDK/economics-n-stuff/settings/secrets/actions og opret en secret med navnet **BUFFER_API_KEY**. Indsæt nøglen dér, ALDRIG i chatten eller i en GitHub-fil.
+- Normalt identificerer botten automatisk Facebook-kanalen. Hvis ikke: Tilføj kanalen som **BUFFER_CHANNEL_ID** under samme Secrets-side.
 
-Programmet ligger i dri/bot.py. Workflowet ligger i .github/workflows/dri-editorial.yml.
+**Der skal IKKE oprettes eller indsættes `OPENAI_API_KEY`.** Den gamle kode i `dri/bot.py` indeholder en ikke-aktiveret OpenAI-genereringsfunktion, som den gratis arbejdsgang IKKE bruger.
 
-## Omkostning og sikkerhed
+## Realistiske begrænsninger
 
-OpenAI API faktureres særskilt efter forbrug og websearch; gennemfør testkørsler og sæt et budget i OpenAI Platform. Der er også gældende forbrugsgrænser for Buffer og GitHub Actions. Kode og billeder ligger i et offentligt GitHub-repository. API-nøgler må kun ligge som GitHub Actions-secrets.
+- ChatGPT Scheduled Tasks kan bruge tilsluttede apps, men en bestemt planlagt kørsel kan stadig kræve tilladelse for at udføre GitHub-skrivehandlinger. Test én automatisk kørsel, før du regner med, at overførslen er fuldt selvkørende.
+- Repoet `cstoDK/economics-n-stuff` er **offentligt**: Opslagets ufærdige tekst og det genererede billede er derfor synlige i GitHub før offentliggørelse på Facebook. Brug ikke fortroligt materiale i opslagene. Vi kan senere flytte til et privat repo.
+- Billedet er enten tydeligt krediteret arkivfoto, hvis rettighederne godkendes, eller en original illustration. Ingen Reuters-fotos bruges uden rettighed.
+- Koden tjekker skema, kildernes domæner, datoer og billedlicens, men kan **ikke selv udføre et yderligere uafhængigt AI-faktatjek**. Fakta gennemgås af ChatGPT under researchen, og endelig ansvar ligger hos redaktøren.
+- Facebook publiceres **aldrig uden godkendelse**.
+- GitHub Actions og Buffer Free har brugsgrænser, men dette normale 6-opslag/uge-forløb ligger langt under Buffers månedlige API-grænse. Ingen planlagt betalt API-forbrug.
+- Den aktuelle workflow trigges KUN når en ny `dri/incoming/*.json` oprettes eller ved manuel genstart. Den kører ikke selv research, og GitHub bruger ikke OpenAI API.
 
-## Bemærk
+## Test
 
-Automatiseret nyhedsresearch kan fejle eller fejlfortolke kilder. Du er redaktør og godkender altid fakta, kilder, billedret og sluttekst, før du trykker Publish. Hvis formatet også kører som ChatGPT-automation, så slå den ene strøm fra efter end-to-end-test for at undgå dubletter.
+Når Buffer API-nøglen er tilføjet, kan næste planlagte ChatGPT-kørsel oprette den første `dri/incoming/YYYY-MM-DD.json`. Kontroller at kørsel og kladde vises i:
+
+- https://github.com/cstoDK/economics-n-stuff/actions/workflows/dri-editorial.yml
+- https://publish.buffer.com/
+
+Ved fejl fungerer ChatGPTs eget svar stadig som backup, klar til copy/paste.
+
+## Tekniske filer
+
+- `dri/from_chatgpt.py`: lokal kontrol og Buffer draft
+- `.github/workflows/dri-editorial.yml`: gratis automatisering
+- `dri/bot.py`: hjælpefunktioner til licensfoto, design og Buffer API
