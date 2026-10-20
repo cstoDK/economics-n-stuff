@@ -1,46 +1,61 @@
-# DRI: Gratis AI-redaktion
+# DRI: gratis research → verificeret Buffer-kladde
 
-Dette setup bruger **ChatGPT Plus-opgaven, som brugeren allerede betaler for**, til research. Ingen OpenAI API-nøgle og ingen ekstra udgift til AI-research.
+Den eksisterende ChatGPT-opgave researcher mandag–fredag og søndag kl. 07.30
+Europe/Copenhagen. Ingen lørdag. ChatGPT-abonnementets inkluderede research bruges;
+OpenAI API-kald og den gamle direkte bot-indgang er deaktiveret i koden.
+GitHub Actions bruger gratis HTTP/Pillow og den eksisterende Buffer-nøgle.
 
-## Kæden
+## Redaktion og kildebevis
 
-1. ChatGPT Scheduled Task "DRI: Gratis AI-redaktion" skriver et research- og faktakontrolleret opslag.
-2. Den samme ChatGPT-opgave opretter via allerede tilsluttet GitHub-app `dri/incoming/YYYY-MM-DD.json`.
-3. Denne GitHub Actions-workflow starter ved en ny JSON-fil. Koden validerer kildehenvisninger og datoer, finder et frit licenseret arkivfoto hos Wikimedia Commons eller bygger en tydeligt illustreret forside på 1080 × 1350 px.
-4. Den færdige billedfil ligger på GitHub, og et opslag med billedet oprettes som **Buffer draft**, aldrig automatisk publiceret.
-5. Redaktøren finpudser og publicerer selv fra Buffer.
+Før skrivning skal ChatGPT læse `dri/EDITORIAL.md`. Én ny fil pr. københavnsk dato:
+`dri/incoming/YYYY-MM-DD.json`. En eksisterende fil må ikke automatisk overskrives.
+Kun dagens udgave kan leveres. Søndag: 400–550 ord, én tese og sammenhængende narrativ.
 
-## De eneste brugertrin, der mangler
+`approved: true` alene er utilstrækkeligt. Alle historier kræver direkte URL,
+hændelses-/udgivelsesdato og et dokumenteret kildebevis. Et særskilt faktatjek skal
+omfatte præcis den færdige Facebook-tekst. Pipeline genhenter hvert kildeuddrag fra
+en godkendt kilde; manglende felt, utilgængelig kilde, forkert uddrag, fremtidsdato,
+for gammel kilde eller uløste påstande stopper før billedgenerering og levering.
 
-- Opret en gratis konto på https://buffer.com (gratisplan med op til 3 kanaler, ubegrænsede kladder).
-- Forbind Facebook-siden Den Rationelle Investor i Buffer.
-- Gå til https://publish.buffer.com/settings/api og opret den gratis personlige **Buffer API-nøgle**.
-- Gå til https://github.com/cstoDK/economics-n-stuff/settings/secrets/actions og opret en secret med navnet **BUFFER_API_KEY**. Indsæt nøglen dér, ALDRIG i chatten eller i en GitHub-fil.
-- Normalt identificerer botten automatisk Facebook-kanalen. Hvis ikke: Tilføj kanalen som **BUFFER_CHANNEL_ID** under samme Secrets-side.
+Dette er en mekanisk kontrol af evidens, ikke automatisk semantisk sandhedsbevis.
+ChatGPT skal kontrollere ALLE aktuelle tal og påstande, også dem uden for uddraget.
+Brug åbne primærkilder. Paywall/anti-bot-blokering stopper levering; find en anden
+reel kilde og gennemfør kontrollen igen. Opfind aldrig et uddrag for at bestå.
 
-**Der skal IKKE oprettes eller indsættes `OPENAI_API_KEY`.** Den gamle kode i `dri/bot.py` indeholder en ikke-aktiveret OpenAI-genereringsfunktion, som den gratis arbejdsgang IKKE bruger.
+## Levering og genkørsel
 
-## Realistiske begrænsninger
+Workflow tester først. Push med incoming-ændring leverer dagens fil. Andre
+kodeændringer kører en **læsekontrol** af eksisterende Buffer-kvitteringer.
+Manuel kørsel har `audit` som standard og `deliver` som eksplicit mulighed.
+Ingen anden research-planlægning oprettes i GitHub.
 
-- ChatGPT Scheduled Tasks kan bruge tilsluttede apps, men en bestemt planlagt kørsel kan stadig kræve tilladelse for at udføre GitHub-skrivehandlinger. Test én automatisk kørsel, før du regner med, at overførslen er fuldt selvkørende.
-- Repoet `cstoDK/economics-n-stuff` er **offentligt**: Opslagets ufærdige tekst og det genererede billede er derfor synlige i GitHub før offentliggørelse på Facebook. Brug ikke fortroligt materiale i opslagene. Vi kan senere flytte til et privat repo.
-- Billedet er enten tydeligt krediteret arkivfoto, hvis rettighederne godkendes, eller en original illustration. Ingen Reuters-fotos bruges uden rettighed.
-- Koden tjekker skema, kildernes domæner, datoer og billedlicens, men kan **ikke selv udføre et yderligere uafhængigt AI-faktatjek**. Fakta gennemgås af ChatGPT under researchen, og endelig ansvar ligger hos redaktøren.
-- Facebook publiceres **aldrig uden godkendelse**.
-- GitHub Actions og Buffer Free har brugsgrænser, men dette normale 6-opslag/uge-forløb ligger langt under Buffers månedlige API-grænse. Ingen planlagt betalt API-forbrug.
-- Den aktuelle workflow trigges KUN når en ny `dri/incoming/*.json` oprettes eller ved manuel genstart. Den kører ikke selv research, og GitHub bruger ikke OpenAI API.
+Pipeline tjekker seneste main, springer gemte Buffer-ID'er over og gemmer en
+leveringsreservation + billedet på GitHub **før** Buffer-kaldet. Ved timeout,
+nedbrud eller fejl under kvitteringslagring bevares reservationen. En genkørsel
+stopper da til afstemning i Buffer, frem for at risikere en dublet. Det giver
+højst ét automatisk oprettelsesforsøg pr. dato; det garanterer ikke levering ved
+netværksfejl. Slet aldrig en reservation uden først at kontrollere Buffer.
+En afvist Git-push må ikke efterfølges af et Buffer-kald.
 
-## Test
+Buffer modtager altid `saveToDraft: true`, Facebook-type `post`, ingen `dueAt`.
+Returstatus skal være `draft`. Billed-URL'en er bundet til en uforanderlig commit.
+Kildepakke og kvitteringer gemmes også som Actions-artifact, inklusive ved fejl.
 
-Når Buffer API-nøglen er tilføjet, kan næste planlagte ChatGPT-kørsel oprette den første `dri/incoming/YYYY-MM-DD.json`. Kontroller at kørsel og kladde vises i:
+## Billedrettigheder
 
-- https://github.com/cstoDK/economics-n-stuff/actions/workflows/dri-editorial.yml
-- https://publish.buffer.com/
+Kun Commons CC0/PD/standard CC BY vælges. CC BY kræver forfatter og licenslink.
+Kreditering, kilde, licenslink og tilpasningsnote følger teksten. Hvis et egnet
+foto ikke kan hentes, bruges original grafisk illustration på 1080 × 1350.
+Fotooplysninger ligger i kildepakken. Illustration er aldrig en faktisk kursgraf.
 
-Ved fejl fungerer ChatGPTs eget svar stadig som backup, klar til copy/paste.
+## Drift
 
-## Tekniske filer
+Secrets: `BUFFER_API_KEY`, eventuelt `BUFFER_CHANNEL_ID`. Eksisterende hemmeligheder
+skal blive i GitHub Secrets. Repoet er offentligt; tekst, billeder og registreret
+kildebevis kan læses dér. Ingen fortroligt materiale i incoming.
 
-- `dri/from_chatgpt.py`: lokal kontrol og Buffer draft
-- `.github/workflows/dri-editorial.yml`: gratis automatisering
-- `dri/bot.py`: hjælpefunktioner til licensfoto, design og Buffer API
+Test: `python -m unittest discover -s dri/tests -v`.
+Live læsekontrol: workflow_dispatch → audit. Den skaber eller ændrer ingen kladder.
+En fuld ny levering er kun bestået, når den faktiske kildekontrol, billedoprettelse,
+Buffer-status og gemte kvittering alle er kontrolleret. Grønne enhedstests alene
+beviser ikke, at næste planlagte ChatGPT-kørsel kan skrive via connectoren.

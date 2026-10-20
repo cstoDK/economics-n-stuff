@@ -36,7 +36,7 @@ TRUSTED_DOMAINS = (
     "nationalbanken.dk", "dst.dk", "ec.europa.eu", "eurostat.ec.europa.eu",
     "consilium.europa.eu", "europa.eu", "bis.org", "imf.org", "oecd.org",
     "worldbank.org", "bls.gov", "bea.gov", "treasury.gov", "eia.gov",
-    "iea.org", "statbank.dk", "eur-lex.europa.eu", "nasdaq.com",
+    "iea.org", "stats.gov.cn", "boj.or.jp", "statbank.dk", "eur-lex.europa.eu", "nasdaq.com",
     "investor.nvidia.com", "investors.microsoft.com", "investor.apple.com",
     "investors.tsmc.com", "sec.gov", "fred.stlouisfed.org",
 )
@@ -67,29 +67,7 @@ def api_request(url, *, body=None, params=None, headers=None, method="POST", tim
 
 
 def llm_call(prompt: str, *, model=MODEL, search=True, max_tokens=9000):
-    key = os.environ["OPENAI_API_KEY"]
-    payload = {
-        "model": model,
-        "input": prompt,
-        "max_output_tokens": max_tokens,
-    }
-    if search:
-        payload["tools"] = [{"type": "web_search"}]
-        payload["tool_choice"] = "required"
-    data = api_request(
-        OPENAI_ENDPOINT, body=payload,
-        headers={"Authorization": f"Bearer {key}"}, timeout=280,
-    )
-    pieces = []
-    for item in data.get("output", []):
-        if item.get("type") != "message":
-            continue
-        for content in item.get("content", []):
-            if content.get("type") == "output_text":
-                pieces.append(content.get("text", ""))
-    if not pieces:
-        raise RuntimeError("Ingen tekst i OpenAI-svar: " + json.dumps(data, ensure_ascii=False)[:900])
-    return parse_json("\n".join(pieces))
+    raise RuntimeError("Paid AI APIs are disabled. Research must run in the existing ChatGPT subscription.")
 
 
 def parse_json(text: str):
@@ -193,7 +171,9 @@ def commons_photo(subject: str):
             if not src.startswith("https://") or info.get("width", 0) < 850 or info.get("height", 0) < 650:
                 continue
             rights_url = strip_html(meta.get("LicenseUrl", {}).get("value", ""))
-            artist = strip_html(meta.get("Artist", {}).get("value", ""))[:130]
+            artist = strip_html(meta.get("Artist", {}).get("value", ""))
+            if not artist or (normalized.startswith("ccby") and not rights_url.startswith("https://creativecommons.org/licenses/by/")):
+                continue
             record = {
                 "title": page.get("title", ""), "url": src,
                 "page_url": info.get("descriptionurl") or "https://commons.wikimedia.org/",
@@ -322,7 +302,7 @@ def draft_in_buffer(text: str, public_image_url: str | None):
     channel = find_channel()
     query = '''mutation ($input: CreatePostInput!) {
       createPost(input: $input) {
-        ... on PostActionSuccess { post { id text } }
+        ... on PostActionSuccess { post { id text status } }
         ... on MutationError { message }
       }
     }'''
@@ -337,6 +317,8 @@ def draft_in_buffer(text: str, public_image_url: str | None):
     post = result.get("post") or {}
     if not post.get("id"):
         raise RuntimeError("Buffer bekræftede ikke kladden: " + str(result))
+    if post.get("status") != "draft":
+        raise RuntimeError("Buffer did not confirm draft status; do not retry automatically")
     return post["id"]
 
 
@@ -410,11 +392,7 @@ def main():
     parser.add_argument("stage", choices=("generate", "buffer"))
     parser.add_argument("--force", action="store_true", help="Manual workflow run regardless of local weekday and time")
     args = parser.parse_args()
-    instant = now_local()
-    if args.stage == "generate":
-        create_draft(instant, args.force)
-    else:
-        submit_draft(instant, args.force)
+    raise RuntimeError("Legacy entrypoint disabled. Use dri/pipeline.py with verified ChatGPT input.")
 
 
 if __name__ == "__main__":

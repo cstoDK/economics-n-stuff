@@ -1,89 +1,82 @@
-name: DRI – free ChatGPT to Buffer drafts
+name: DRI – verified research to Buffer drafts
 on:
   push:
     branches: [main]
-    paths:
-      - 'dri/incoming/*.json'
+    paths: ['dri/**', '.github/workflows/dri-editorial.yml']
+  pull_request:
+    paths: ['dri/**', '.github/workflows/dri-editorial.yml']
   workflow_dispatch:
     inputs:
+      operation:
+        description: 'audit only reads Buffer; deliver requires a verified edition'
+        type: choice
+        options: [audit, deliver]
+        default: audit
       incoming_file:
-        description: 'Path to already researched JSON, e.g. dri/incoming/2026-10-18.json'
-        required: true
+        description: 'Optional dri/incoming/YYYY-MM-DD.json; default today in Copenhagen'
         type: string
-
+        default: ''
 permissions:
-  contents: write
-
+  contents: read
 concurrency:
-  group: dri-buffer-draft
+  group: dri-buffer-${{ github.ref }}
   cancel-in-progress: false
-
 jobs:
-  draft:
+  tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install free image and HTTP dependencies
-        run: pip install -r dri/requirements.txt
-      - name: Detect editorial file and require Buffer credentials
-        id: input
+      - run: pip install -r dri/requirements.txt
+      - run: python -m unittest discover -s dri/tests -v
+  draft:
+    needs: tests
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r dri/requirements.txt
+      - name: Select operation without interpolating input into shell
+        id: operation
         env:
-          INPUT_FILE: ${{ inputs.incoming_file }}
-          BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
-        shell: bash
+          EVENT_NAME: ${{ github.event_name }}
+          OPERATION: ${{ inputs.operation }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
         run: |
-          set -eu
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            file="$INPUT_FILE"
+          if [ "$EVENT_NAME" = workflow_dispatch ]; then
+            echo "mode=${OPERATION:-audit}" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "$BEFORE" "$AFTER" -- dri/incoming/ | grep -Eq '^dri/incoming/[0-9]{4}-[0-9]{2}-[0-9]{2}\.json$'; then
+            echo 'mode=deliver' >> "$GITHUB_OUTPUT"
           else
-            file="$(git diff-tree --no-commit-id --name-only -r HEAD | grep -E '^dri/incoming/[0-9]{4}-[0-9]{2}-[0-9]{2}\.json$' | head -n 1 || true)"
+            echo 'mode=audit' >> "$GITHUB_OUTPUT"
           fi
-          test -n "$file" && test -f "$file" || { echo 'No new editorial file'; exit 1; }
-          test -n "$BUFFER_API_KEY" || { echo 'Connect Buffer first: BUFFER_API_KEY GitHub secret missing'; exit 1; }
-          echo "file=$file" >> "$GITHUB_OUTPUT"
-      - name: Create portrait cover and validate cited draft
+      - name: Verify sources and create only a draft, or audit existing receipts
         env:
-          PYTHONPATH: dri
-        run: python dri/from_chatgpt.py prepare "${{ steps.input.outputs.file }}"
-      - name: Save cover to GitHub
-        shell: bash
-        run: |
-          if [ -n "$(git status --porcelain -- dri/assets/)" ]; then
-            git config user.name "dri-bot"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add dri/assets/
-            git commit -m 'chore(dri): add portrait cover'
-            git push
-          fi
-      - name: Create private Buffer draft, NEVER publish
-        env:
-          PYTHONPATH: dri
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
           BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
-        run: python dri/from_chatgpt.py deliver "${{ steps.input.outputs.file }}"
-      - name: Remember draft ID (prevent duplicates)
-        shell: bash
-        run: |
-          if [ -n "$(git status --porcelain -- dri/state/)" ]; then
-            git config user.name "dri-bot"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add dri/state/
-            git commit -m 'chore(dri): record Buffer draft id'
-            git push
-          fi
-      - name: Retain fact-check record
+          OPERATION: ${{ steps.operation.outputs.mode }}
+          INPUT_FILE: ${{ inputs.incoming_file }}
+        run: python dri/pipeline.py "$OPERATION" --file "$INPUT_FILE"
+      - name: Retain verification, receipts and audit even on failure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dri-editorial-${{ github.run_id }}
+          name: dri-editorial-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             dri/out/*.json
             dri/out/*.txt
-          if-no-files-found: ignore
+            dri/state/*
+          if-no-files-found: warn
           retention-days: 30

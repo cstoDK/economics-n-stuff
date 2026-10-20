@@ -6,6 +6,8 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import os
+from verification import verify, digest
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -28,7 +30,7 @@ def validate_file(filename: str):
     if data.get("date") != date_string:
         raise RuntimeError("Payload date and filename do not match")
     instant = datetime.strptime(date_string, "%Y-%m-%d").replace(hour=7,minute=30,tzinfo=TZ)
-    if abs((now_local().date()-instant.date()).days) > 1:
+    if now_local().date() != instant.date():
         raise RuntimeError("Outdated or future-dated post, refusing to create draft")
     if mode_for(instant) != data.get("mode") or instant.weekday() == 5:
         raise RuntimeError("Mode does not match date / no Saturday edition")
@@ -45,6 +47,7 @@ def prepare(filename: str):
     if marker.exists():
         print("Already delivered:", date)
         return
+    verified_hash = verify(data, instant)
     OUT.mkdir(parents=True, exist_ok=True)
     photo = None
     try:
@@ -57,11 +60,12 @@ def prepare(filename: str):
     used = make_cover(title, subtitle, photo, asset)
     if used:
         body += ("\n\nArkivfoto: " + used["artist"] + " / Wikimedia Commons (" + used["license"]
-                 + "). Kilde og licens: " + used["page_url"])
+                 + "). Kilde: " + used["page_url"] + ". Licens: " + used["license_url"] + ". Tilpasset med tekst og ramme.")
     bundle = {
         "date": date, "text": body, "sources": data["sources"],
         "asset": str(asset.relative_to(ROOT)), "photo": used,
         "editorial_review_required": True,
+        "verified_text_sha256": verified_hash, "verification": data["verification"],
     }
     (OUT / f"{date}.json").write_text(json.dumps(bundle, ensure_ascii=False, indent=2),encoding="utf-8")
     (OUT / f"{date}.txt").write_text(body,encoding="utf-8")
@@ -69,16 +73,25 @@ def prepare(filename: str):
 
 
 def deliver(filename: str):
-    instant, _, _ = validate_file(filename)
+    instant, data, body = validate_file(filename)
     date = instant.date().isoformat()
     marker = STATE / f"{date}.buffer-id"
     if marker.exists():
         print("Already delivered, skipping duplicate.")
         return
     bundle = json.loads((OUT / f"{date}.json").read_text(encoding="utf-8"))
+    if bundle.get("verified_text_sha256") != digest(body):
+        raise RuntimeError("Prepared bundle does not match verified input")
+    verify(data, instant)
+    claim = STATE / f"{date}.delivery.json"
+    if not claim.exists() or json.loads(claim.read_text()).get("run_id") != os.environ.get("GITHUB_RUN_ID"):
+        raise RuntimeError("Missing persisted delivery reservation")
     # The GitHub workflow commits the cover before this step.
     from bot import requests, time
-    image_url = f"https://raw.githubusercontent.com/cstoDK/economics-n-stuff/main/dri/assets/{date}.jpg"
+    revision = os.environ["DRI_ASSET_COMMIT"]
+    if not re.fullmatch(r"[0-9a-f]{40}", revision):
+        raise RuntimeError("Image must reference an immutable Git commit")
+    image_url = f"https://raw.githubusercontent.com/cstoDK/economics-n-stuff/{revision}/dri/assets/{date}.jpg"
     for _ in range(10):
         try:
             result = requests.get(image_url, timeout=15)
