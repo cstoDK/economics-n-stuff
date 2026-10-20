@@ -4,8 +4,11 @@ Tid: mandag–fredag og søndag 07.30 Europe/Copenhagen, aldrig lørdag.
 Brug kun inkluderet ChatGPT-webresearch, ingen betalte API'er.
 
 1. Læs først dagens `dri/incoming/YYYY-MM-DD.json` og `dri/state/YYYY-MM-DD.buffer-id`
-   eller `.delivery.json`. Eksisterende fil/kvittering/reservation: opret ikke igen.
-   Ved uklar tidligere levering: stop og rapportér afstemningsbehov.
+   eller `.delivery.json`. Eksisterende kvittering/reservation: opret ikke igen.
+   Eksisterende incoming-fil uden state: læs den tilhørende Actions-kørsel.
+   Kun hvis den er afsluttet med kilde-/valideringsfejl FØR reservation og Buffer,
+   må samme fil revideres én gang med ny fuld kildekontrol og aktuel blob-SHA.
+   Ved uklar, igangværende eller tidligere levering: stop og rapportér afstemningsbehov.
 2. Research 3–5 væsentlige nye historier på hverdage, med Danmark/Europa først.
    450–700 ord, "X TING INVESTORER SKAL VIDE I DAG", slut med "DAGENS VIGTIGSTE POINTE".
    Søndag: 3–4 forbundne udviklinger fra seneste handelsuge, 400–550 ord med
@@ -29,7 +32,10 @@ JSON-felter:
   `reviewed_text`: en nøjagtig kopi af `facebook_text`, `unresolved_claims`: [].
 - `photo_subject`, `cover_title` (max 60 tegn), `cover_subtitle` (max 80 tegn).
 
-Brug åbne HTML-kilder på domæner tilladt i `dri/bot.py`. Workflow genhenter uddraget.
+Brug åbne HTML-primærkilder på domæner tilladt i `dri/bot.py`, fx ECB, Eurostat,
+Nationalbanken, Danmarks Statistik og Fed. Reuters/FT/Bloomberg kan give researchspor,
+men må ikke være den eneste evidence-URL: deres adgangskontrol kan blokere Actions.
+Workflow genhenter uddraget. Find en anden historie hvis primærbeviset ikke er tilgængeligt.
 Et uddrag er et kontrollerbart kildebevis, ikke dokumentation for alt i sig selv.
 Dæk alle påstande i den redaktionelle gennemgang. Daglige datoer: højst tre dage
 gamle; søndag: højst ni. Ingen fremtidige hændelser som allerede indtrufne fakta.
@@ -41,3 +47,5 @@ Rapportér kun Buffer-succes ved konkret kladde-ID og status, aldrig ud fra en
 filskrivning alene. Hvis noget fejler, giv præcis blokering og kørselslink.
 Ingen automatisk publicering, scheduling i Buffer eller automatisk genforsøg
 efter usikker levering. Ingen kopier af samme opgave eller ekstra tidsplaner.
+
+Find Actions via GitHub fetch på `https://api.github.com/repos/cstoDK/economics-n-stuff/actions/runs?head_sha=COMMIT_SHA` (erstat med faktisk commit), derefter jobs og logs. Brug ikke kun den PR-filtrerede commit-workflow-funktion. Filskrivning kan være afsluttet før kørslen fremgår; kontrollér igen efter en kort ventetid.
