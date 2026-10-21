@@ -1,4 +1,4 @@
-# DRI: gratis research → verificeret Buffer-kladde
+# DRI: gratis research → kildekontrol → automatisk Facebook-opslag
 
 Den eksisterende ChatGPT-opgave researcher mandag–fredag og søndag kl. 07.30
 Europe/Copenhagen. Ingen lørdag. ChatGPT-abonnementets inkluderede research bruges;
@@ -8,7 +8,7 @@ GitHub Actions bruger gratis HTTP/Pillow og den eksisterende Buffer-nøgle.
 ## Redaktion og kildebevis
 
 Før skrivning skal ChatGPT læse `dri/EDITORIAL.md`. Én ny fil pr. københavnsk dato:
-`dri/incoming/YYYY-MM-DD.json`. En eksisterende fil må ikke automatisk overskrives.
+`dri/incoming/YYYY-MM-DD.json`. Reparation af en afvist fil følger betingelserne i EDITORIAL.md.
 Kun dagens udgave kan leveres. Søndag: 400–550 ord, én tese og sammenhængende narrativ.
 
 `approved: true` alene er utilstrækkeligt. Alle historier kræver direkte URL,
@@ -26,7 +26,7 @@ reel kilde og gennemfør kontrollen igen. Opfind aldrig et uddrag for at bestå.
 
 Workflow tester først. Push med incoming-ændring leverer dagens fil. Andre
 kodeændringer kører en **læsekontrol** af eksisterende Buffer-kvitteringer.
-Manuel kørsel har `audit` som standard og `deliver` som eksplicit mulighed.
+Manuel kørsel har `audit` som standard. `deliver` opretter og udgiver automatisk en verificeret udgave; `publish` frigiver dagens allerede registrerede kladde.
 Ingen anden research-planlægning oprettes i GitHub.
 
 Pipeline tjekker seneste main, springer gemte Buffer-ID'er over og gemmer en
@@ -37,8 +37,9 @@ højst ét automatisk oprettelsesforsøg pr. dato; det garanterer ikke levering 
 netværksfejl. Slet aldrig en reservation uden først at kontrollere Buffer.
 En afvist Git-push må ikke efterfølges af et Buffer-kald.
 
-Buffer modtager altid `saveToDraft: true`, Facebook-type `post`, ingen `dueAt`.
-Returstatus skal være `draft`. Billed-URL'en er bundet til en uforanderlig commit.
+Buffer opretter først et internt mellemtrin med `saveToDraft: true`, Facebook-type
+`post` og status `draft`. Derefter udgives samme ID automatisk med `shareNow` og
+`saveToDraft: false`; succes kræver den faktiske status `sent`. Billed-URL'en er bundet til en uforanderlig commit.
 Kildepakke og kvitteringer gemmes også som Actions-artifact, inklusive ved fejl.
 
 ## Billedrettigheder
@@ -62,8 +63,9 @@ beviser ikke, at næste planlagte ChatGPT-kørsel kan skrive via connectoren.
 
 ## Automatisk offentliggørelse
 
+Automatisk offentliggørelse blev godkendt og aktiveret 21. oktober 2026.
 Udgivelsesmodulet er implementeret i `publishing.py`. Aktuel aktivering står i
-`publishing.json`; `enabled: false` bevarer kladdelevering. Ved `enabled: true`
+`publishing.json`; `enabled: true`. Flaget kan sættes til false for kladdelevering. Ved `enabled: true`
 fortsætter en almindelig `deliver` automatisk fra den gemte kladde til Facebook.
 Det kræver ingen manuel godkendelse af hvert opslag.
 

@@ -2,6 +2,10 @@
 
 Tid: mandag–fredag og søndag 07.30 Europe/Copenhagen, aldrig lørdag.
 Brug kun inkluderet ChatGPT-webresearch, ingen betalte API'er.
+Brugeren godkendte 21. oktober 2026 automatisk offentliggørelse på Facebook-siden
+Den Rationelle Investor, inklusive dagens verificerede opslag. Det erstatter det
+tidligere krav om kun kladder. Der kræves ikke manuel godkendelse af hvert opslag.
+Manglende kildeverifikation blokerer fortsat både levering og offentliggørelse.
 
 1. Læs først dagens `dri/incoming/YYYY-MM-DD.json` og `dri/state/YYYY-MM-DD.buffer-id`
    eller `.delivery.json`. Eksisterende kvittering/reservation: opret ikke igen.
@@ -43,9 +47,13 @@ gamle; søndag: højst ni. Ingen fremtidige hændelser som allerede indtrufne fa
 Skriv gennem GitHub-connectoren til `cstoDK/economics-n-stuff`, main, den ene
 incoming-fil. Opdater ikke kode, workflow eller state fra research-opgaven.
 Kontrollér faktisk filindhold/commit og den tilhørende Actions-kørsel.
-Rapportér kun Buffer-succes ved konkret kladde-ID og status, aldrig ud fra en
-filskrivning alene. Hvis noget fejler, giv præcis blokering og kørselslink.
-Ingen automatisk publicering, scheduling i Buffer eller automatisk genforsøg
-efter usikker levering. Ingen kopier af samme opgave eller ekstra tidsplaner.
+GitHub Actions opretter først en intern Buffer-kladde, gemmer dens ID, genkontrollerer
+kilder og præcist indhold og udgiver derefter automatisk det samme opslag på DRI.
+Rapportér kun offentliggjort ved `.publication.json` med status `sent`, Buffer-ID
+og udgivelsestidspunkt, helst med Facebook-link. En kladde eller filskrivning er
+ikke afsluttet offentliggørelse. Hvis noget fejler, giv præcis blokering og kørselslink.
+Ingen blind gentagelse efter usikker levering og ingen kopier af opgaven.
+Ved eksisterende Buffer-ID: aflæs også `.publication.json` og Actions-status;
+opret aldrig en ny fil eller et nyt opslag for at forsøge igen.
 
 Find Actions via GitHub fetch på `https://api.github.com/repos/cstoDK/economics-n-stuff/actions/runs?head_sha=COMMIT_SHA` (erstat med faktisk commit), derefter jobs og logs. Brug ikke kun den PR-filtrerede commit-workflow-funktion. Filskrivning kan være afsluttet før kørslen fremgår; kontrollér igen efter en kort ventetid.

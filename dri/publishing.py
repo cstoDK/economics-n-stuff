@@ -1,4 +1,4 @@
-"""Publication implementation; disabled until publishing.json is explicitly enabled."""
+"""Automatic publication of verified DRI editions; controlled by publishing.json."""
 import json
 import os
 import time
