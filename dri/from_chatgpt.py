@@ -1,5 +1,5 @@
 """Bridge: ChatGPT Scheduled Task -> GitHub JSON -> licensed cover -> Buffer draft.
-This module NEVER uses the OpenAI API and NEVER publishes to Facebook.
+No paid AI API is used. publishing.py can automatically release verified drafts.
 """
 from __future__ import annotations
 
@@ -64,12 +64,13 @@ def prepare(filename: str):
     bundle = {
         "date": date, "text": body, "sources": data["sources"],
         "asset": str(asset.relative_to(ROOT)), "photo": used,
-        "editorial_review_required": True,
+        "editorial_review_required": False,
         "verified_text_sha256": verified_hash, "verification": data["verification"],
     }
     (OUT / f"{date}.json").write_text(json.dumps(bundle, ensure_ascii=False, indent=2),encoding="utf-8")
     (OUT / f"{date}.txt").write_text(body,encoding="utf-8")
     print("Validated draft and 1080x1350 cover created:", date)
+    return bundle
 
 
 def deliver(filename: str):

@@ -1,5 +1,8 @@
 {
   "status": "delivered",
   "date": "2026-10-21",
-  "buffer_id": "6ad84dc9d894396f66c952c8"
+  "buffer_id": "6ad84dc9d894396f66c952c8",
+  "text_sha256": "7e75615b32bb7ea0512ec8a23a10add21fa875bdfbe3c24e1a92de3b2849efde",
+  "verified_text_sha256": "7e75615b32bb7ea0512ec8a23a10add21fa875bdfbe3c24e1a92de3b2849efde",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/8ac9aba9123346ba6f796df64f997ea102e9e31a/dri/assets/2026-10-21.jpg"
 }

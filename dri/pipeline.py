@@ -37,16 +37,20 @@ def deliver_one(filename):
     claim = bridge.STATE / f'{day}.delivery.json'
     if claim.exists():
         raise RuntimeError('Prior delivery reservation exists. Reconcile Buffer before retrying; possible accepted request.')
-    bridge.prepare(filename)
+    bundle = bridge.prepare(filename)
     bridge.STATE.mkdir(parents=True, exist_ok=True)
-    claim.write_text(json.dumps({'status': 'reserved', 'run_id': os.environ['GITHUB_RUN_ID'],
-                                 'date': day}, indent=2))
+    from verification import digest
+    record = {'status': 'reserved', 'run_id': os.environ['GITHUB_RUN_ID'], 'date': day,
+              'text_sha256': digest(bundle['text']),
+              'verified_text_sha256': bundle['verified_text_sha256']}
+    claim.write_text(json.dumps(record, indent=2))
     revision = persist([str(claim.relative_to(bridge.ROOT)), f'dri/assets/{day}.jpg'],
                        f'chore(dri): reserve {day} delivery and save cover')
     os.environ['DRI_ASSET_COMMIT'] = revision
     bridge.deliver(filename)
-    claim.write_text(json.dumps({'status': 'delivered', 'date': day,
-                                'buffer_id': marker.read_text().strip()}, indent=2))
+    record.update(status='delivered', buffer_id=marker.read_text().strip(),
+                  image_url=f'https://raw.githubusercontent.com/cstoDK/economics-n-stuff/{revision}/dri/assets/{day}.jpg')
+    claim.write_text(json.dumps(record, indent=2))
     persist([str(claim.relative_to(bridge.ROOT)), str(marker.relative_to(bridge.ROOT))],
             f'chore(dri): record {day} Buffer draft receipt')
 
@@ -85,13 +89,17 @@ def audit():
     print(json.dumps(report))
     if set(found) != expected:
         raise RuntimeError('One or more recorded Buffer posts were not found')
-    if any(p['status'] != 'draft' or not p.get('assets') for p in found.values()):
-        raise RuntimeError('Recorded post is not a draft with an attached asset; inspect report')
+    for marker in bridge.STATE.glob('*.buffer-id'):
+        post = found[marker.read_text().strip()]
+        publication = bridge.STATE / (marker.stem + '.publication.json')
+        allowed = ('scheduled', 'sending', 'sent') if publication.exists() else ('draft',)
+        if post['status'] not in allowed or not post.get('assets'):
+            raise RuntimeError('Recorded post has an unexpected status or missing image; inspect report')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('mode', choices=['deliver', 'audit'])
+    parser.add_argument('mode', choices=['deliver', 'publish', 'audit'])
     parser.add_argument('--file', default='')
     args = parser.parse_args()
     if args.mode == 'audit': audit()
@@ -99,4 +107,9 @@ if __name__ == '__main__':
         filename = args.file or f'dri/incoming/{now_local().date().isoformat()}.json'
         if not Path(filename).is_file():
             raise RuntimeError('No verified edition for today; no delivery')
-        deliver_one(filename)
+        if args.mode == 'deliver':
+            deliver_one(filename)
+        policy = json.loads((bridge.ROOT / 'dri/publishing.json').read_text())
+        if args.mode == 'publish' or policy.get('enabled') is True:
+            from publishing import publish_one
+            publish_one(filename, persist)

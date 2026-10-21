@@ -59,3 +59,26 @@ Live læsekontrol: workflow_dispatch → audit. Den skaber eller ændrer ingen k
 En fuld ny levering er kun bestået, når den faktiske kildekontrol, billedoprettelse,
 Buffer-status og gemte kvittering alle er kontrolleret. Grønne enhedstests alene
 beviser ikke, at næste planlagte ChatGPT-kørsel kan skrive via connectoren.
+
+## Automatisk offentliggørelse
+
+Udgivelsesmodulet er implementeret i `publishing.py`. Aktuel aktivering står i
+`publishing.json`; `enabled: false` bevarer kladdelevering. Ved `enabled: true`
+fortsætter en almindelig `deliver` automatisk fra den gemte kladde til Facebook.
+Det kræver ingen manuel godkendelse af hvert opslag.
+
+Før udgivelse kontrolleres dagens udgave, fuld redaktionel verifikationskontrakt,
+genhentede kildeuddrag, den præcise tekst inklusive billedkreditering, det oprindelige
+billede og den tilsluttede DRI-kanals udgivelsesrettigheder. Et arkiveret teksthash
+binder Buffer-opslaget til den verificerede udgave. Historiske kladder udgives ikke.
+
+Udgivelsen bruger `editPost` på det allerede registrerede ID med `shareNow`,
+`schedulingType: automatic` og `saveToDraft: false`. Før kaldet gemmes en separat
+`.publication.json`-reservation i GitHub. Der oprettes ikke endnu et opslag.
+Ved timeout genudføres mutationen ikke. En genkørsel aflæser samme ID og afstemmer
+status. Kun `sent` med udgivelsestidspunkt registreres som offentliggjort; link og
+kvittering gemmes i `.publication.json`. Platformfejl stopper med den konkrete fejl.
+
+`workflow_dispatch → publish` er til frigivelse af dagens allerede verificerede
+kladde. Den er underlagt samme aktiveringsflag, kildekontrol og dubletværn.
+En læsekontrol med `audit` ændrer intet på Facebook eller i Buffer.

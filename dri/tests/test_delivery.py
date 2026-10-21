@@ -78,14 +78,14 @@ class DeliveryTests(unittest.TestCase):
     def test_failure_after_remote_acceptance_never_retries(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
-            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare'), patch.object(pipeline, 'persist', return_value='a'*40), patch.object(bridge, 'deliver', side_effect=TimeoutError('response lost')) as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
+            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value={'text': 'reviewed', 'verified_text_sha256': v.digest('reviewed')}), patch.object(pipeline, 'persist', return_value='a'*40), patch.object(bridge, 'deliver', side_effect=TimeoutError('response lost')) as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
                 with self.assertRaises(TimeoutError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 with self.assertRaises(RuntimeError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 self.assertEqual(deliver.call_count, 1)
     def test_failed_reservation_push_never_calls_buffer(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
-            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare'), patch.object(pipeline, 'persist', side_effect=RuntimeError('push rejected')), patch.object(bridge, 'deliver') as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
+            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value={'text': 'reviewed', 'verified_text_sha256': v.digest('reviewed')}), patch.object(pipeline, 'persist', side_effect=RuntimeError('push rejected')), patch.object(bridge, 'deliver') as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
                 with self.assertRaises(RuntimeError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 deliver.assert_not_called()
 

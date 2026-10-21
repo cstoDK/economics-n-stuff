@@ -1,6 +1,6 @@
 """DRI editorial bot: research -> independent check -> 4:5 cover -> Buffer draft.
 
-Never publishes: Buffer's createPost always receives saveToDraft: true.
+This helper creates drafts. Publishing policy is enforced in publishing.py.
 """
 from __future__ import annotations
 

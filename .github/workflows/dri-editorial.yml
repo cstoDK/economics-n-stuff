@@ -1,4 +1,4 @@
-name: DRI – verified research to Buffer drafts
+name: DRI – verified research and Facebook delivery
 on:
   push:
     branches: [main]
@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
     inputs:
       operation:
-        description: 'audit only reads Buffer; deliver requires a verified edition'
+        description: 'audit reads only; deliver follows publishing.json; publish releases today’s recorded draft'
         type: choice
-        options: [audit, deliver]
+        options: [audit, deliver, publish]
         default: audit
       incoming_file:
         description: 'Optional dri/incoming/YYYY-MM-DD.json; default today in Copenhagen'
@@ -31,7 +31,7 @@ jobs:
           python-version: '3.12'
       - run: pip install -r dri/requirements.txt
       - run: python -m unittest discover -s dri/tests -v
-  draft:
+  delivery:
     needs: tests
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
@@ -62,7 +62,7 @@ jobs:
           else
             echo 'mode=audit' >> "$GITHUB_OUTPUT"
           fi
-      - name: Verify sources and create only a draft, or audit existing receipts
+      - name: Verify sources and deliver according to publishing policy, or audit receipts
         env:
           BUFFER_API_KEY: ${{ secrets.BUFFER_API_KEY }}
           BUFFER_CHANNEL_ID: ${{ secrets.BUFFER_CHANNEL_ID }}
