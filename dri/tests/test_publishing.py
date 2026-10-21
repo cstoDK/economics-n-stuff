@@ -52,7 +52,7 @@ class PublicationTests(unittest.TestCase):
         self.mutate.side_effect = mutation
         self.assertEqual(self.run_publish()['status'], 'sent')
         self.assertEqual(json.loads(self.claim.read_text())['external_link'], 'https://facebook.com/test')
-        self.mutate.assert_called_once_with('recorded')
+        self.mutate.assert_called_once_with(self.draft)
 
     def test_disabled_policy_never_contacts_buffer(self):
         self.policy.write_text('{"enabled": false}')
@@ -94,6 +94,15 @@ class PublicationTests(unittest.TestCase):
         with self.assertRaises(RuntimeError): self.run_publish()
         self.mutate.assert_called_once()
 
+    def test_manually_reconciled_rejection_allows_one_verified_attempt(self):
+        self.claim.write_text('{"buffer_id": "recorded", "status": "reconciled_rejection"}')
+        self.mutate.side_effect = TimeoutError('response lost')
+        with self.assertRaises(TimeoutError): self.run_publish()
+        self.get.side_effect = None
+        self.get.return_value = self.draft
+        with self.assertRaises(RuntimeError): self.run_publish()
+        self.mutate.assert_called_once()
+
     def test_sent_post_reconciles_without_publication(self):
         self.claim.write_text('{"buffer_id": "recorded", "status": "reserved"}')
         self.get.side_effect = None
@@ -106,9 +115,9 @@ class PublicationTests(unittest.TestCase):
         result = {'editPost': {'post': {'id': 'recorded', 'status': 'sending', 'schedulingType': 'automatic'}}}
         with patch.object(p, 'buffer_graphql', return_value=result) as api:
             # Call the actual function behind the local test mock.
-            real_request_publication('recorded')
+            real_request_publication(self.draft)
             payload = api.call_args.args[1]['input']
-            self.assertEqual(payload, {'id': 'recorded', 'mode': 'shareNow', 'schedulingType': 'automatic', 'saveToDraft': False})
+            self.assertEqual(payload, {'id': 'recorded', 'mode': 'shareNow', 'schedulingType': 'automatic', 'saveToDraft': False, 'text': 'reviewed', 'assets': [{'image': {'url': 'https://cover'}}], 'metadata': {'facebook': {'type': 'post'}}})
 
 
 real_request_publication = p.request_publication

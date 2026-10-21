@@ -42,7 +42,8 @@ def validate_post(post, receipt, channel_id):
         raise RuntimeError('Live Buffer image differs from the licensed verified cover')
 
 
-def request_publication(post_id):
+def request_publication(verified_post):
+    post_id = verified_post["id"]
     # Edit the recorded post; never create a second post as a retry.
     result = buffer_graphql('''mutation($input: EditPostInput!) {
       editPost(input: $input) {
@@ -50,7 +51,10 @@ def request_publication(post_id):
         ... on MutationError { message }
       }
     }''', {'input': {'id': post_id, 'mode': 'shareNow',
-                     'schedulingType': 'automatic', 'saveToDraft': False}})['editPost']
+                     'schedulingType': 'automatic', 'saveToDraft': False,
+                     'text': verified_post['text'],
+                     'assets': [{'image': {'url': asset['source']}} for asset in verified_post['assets']],
+                     'metadata': {'facebook': {'type': 'post'}}}})['editPost']
     if result.get('message'):
         raise RuntimeError('Buffer rejected publication: ' + result['message'])
     post = result.get('post') or {}
@@ -91,15 +95,18 @@ def publish_one(filename, persist):
     if claim.exists() and json.loads(claim.read_text()).get('buffer_id') != post_id:
         raise RuntimeError('Publication reservation belongs to another post')
     if post['status'] == 'draft':
-        if claim.exists():
+        if claim.exists() and json.loads(claim.read_text()).get('status') != 'reconciled_rejection':
             raise RuntimeError('Ambiguous earlier publication attempt: reconcile before retrying')
+        # Only maintenance may mark a definitive rejection reconciled after a live
+        # read proves the original post is still a draft. The reservation below
+        # consumes that one-time retry; timeouts always remain blocked.
         verify(data, instant)
         post = get_post(post_id)
         validate_post(post, receipt, channel['id'])
         if post['status'] != 'draft':
             raise RuntimeError('Post state changed during verification; no mutation performed')
         save('reserved', post)
-        request_publication(post_id)
+        request_publication(post)
     elif post['status'] not in ('scheduled', 'sending', 'sent'):
         raise RuntimeError('Buffer publication blocked: ' + str(post.get('error') or post['status']))
     elif post.get('schedulingType') != 'automatic':

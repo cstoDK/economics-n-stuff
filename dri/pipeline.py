@@ -79,10 +79,12 @@ def audit():
         else:
             raise RuntimeError('Audit pagination limit reached')
     from publishing import check_channel, get_post
+    from verification import digest
     channel = check_channel()
     for post_id in expected:
         live = get_post(post_id)
         found[post_id] = {k: live[k] for k in ('id', 'status', 'assets', 'externalLink', 'sentAt', 'schedulingType')}
+        found[post_id]['text_sha256'] = digest(live['text'])
     report = {'expected_ids': sorted(expected), 'posts': found, 'channel': channel, 'read_only': True}
     bridge.OUT.mkdir(parents=True, exist_ok=True)
     (bridge.OUT / 'buffer-audit.json').write_text(json.dumps(report, indent=2))
@@ -92,7 +94,8 @@ def audit():
     for marker in bridge.STATE.glob('*.buffer-id'):
         post = found[marker.read_text().strip()]
         publication = bridge.STATE / (marker.stem + '.publication.json')
-        allowed = ('scheduled', 'sending', 'sent') if publication.exists() else ('draft',)
+        publication_status = json.loads(publication.read_text()).get('status') if publication.exists() else None
+        allowed = ('draft',) if publication_status in (None, 'reconciled_rejection') else ('scheduled', 'sending', 'sent')
         if post['status'] not in allowed or not post.get('assets'):
             raise RuntimeError('Recorded post has an unexpected status or missing image; inspect report')
 
