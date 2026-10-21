@@ -74,7 +74,12 @@ def audit():
             cursor = result['pageInfo']['endCursor']
         else:
             raise RuntimeError('Audit pagination limit reached')
-    report = {'expected_ids': sorted(expected), 'posts': found, 'read_only': True}
+    from publishing import check_channel, get_post
+    channel = check_channel()
+    for post_id in expected:
+        live = get_post(post_id)
+        found[post_id] = {k: live[k] for k in ('id', 'status', 'assets', 'externalLink', 'sentAt', 'schedulingType')}
+    report = {'expected_ids': sorted(expected), 'posts': found, 'channel': channel, 'read_only': True}
     bridge.OUT.mkdir(parents=True, exist_ok=True)
     (bridge.OUT / 'buffer-audit.json').write_text(json.dumps(report, indent=2))
     print(json.dumps(report))
