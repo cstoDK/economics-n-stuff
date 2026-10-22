@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-22",
+  "mode": "daily",
+  "approved": true,
+  "facebook_text": "3 TING INVESTORER SKAL VIDE I DAG\n\nFlere danskere i arbejde. Mere offentlig gæld i Europa. Dyrere brændstof.\n\nOnsdagens tre statistikker peger på en økonomi, hvor indkomster, gæld og omkostninger skal læses sammen. For din opsparing er forbindelsen ret konkret: Virksomheders salg kan få støtte fra beskæftigelsen, samtidig med at højere udgifter presser kunderne.\n\nTallene dækker forskellige perioder. De er nye offentliggørelser, ikke et øjebliksbillede af torsdagens markeder.\n\n1. BESKÆFTIGELSEN VOKSER, MEN INDUSTRIEN GÅR TILBAGE\n\nDanmarks Statistik offentliggjorde 21. oktober, at lønmodtagerbeskæftigelsen steg med 3.600 personer i august. Omkring 3.095.300 havde dermed et lønmodtagerjob. Det er 29.600 flere end et år tidligere.\n\nVirksomheder og organisationer stod for 2.000 af månedens ekstra lønmodtagere. Offentlig forvaltning og service stod for 1.600. Industrien havde derimod færre lønmodtagere end i juli. Tallene er foreløbige og sæsonkorrigerede.\n\nMekanismen er enkel: Flere lønindkomster kan understøtte forbruget og dermed virksomhedernes omsætning. Men det samlede beskæftigelsestal fortæller hverken, at alle brancher har medvind, eller at indtjeningen følger med.\n\nFor en dansk investor er branchefordelingen derfor værd at følge. Næste beskæftigelsestal kan vise, om fremgangen breder sig, eller om det fortsat er bestemte dele af økonomien, der trækker.\n\n2. EUROPAS GÆLD FYLDER MERE\n\nEurostat offentliggjorde også onsdag nye gældstal. Ved udgangen af andet kvartal udgjorde den offentlige bruttogæld 88,8 procent af BNP i euroområdet, mod 88,4 procent i første kvartal. For EU steg andelen fra 82,5 til 82,9 procent.\n\nDanmarks andel var 27,1 procent. Frankrigs var 119,1 procent og Italiens 139,9 procent. Forskellene er store, også inden for samme europæiske økonomi.\n\nGældskvoten måler gæld i forhold til økonomiens størrelse. Den er ikke en opgørelse over næste års renteregning. Hvor hurtigt ændrede markedsrenter slår igennem på statsbudgettet, afhænger blandt andet af, hvornår eksisterende lån skal refinansieres.\n\nDet relevante spørgsmål er derfor, hvor følsom finansieringen er. Hvis dyrere lån gradvist erstatter billigere lån, kan renteudgifterne optage mere af budgettet. Det kan begrænse pladsen til andre udgifter.\n\nFølg derfor både gældens udvikling og finansieringsvilkårene. Gældskvoten alene fortæller ikke, hvor statsobligationernes kurser skal hen.\n\n3. BRÆNDSTOF TAGER EN STØRRE BID\n\nEurostats tredje offentliggørelse viser, at priserne på brændstof og smøremidler til privat transport i EU var 31,4 procent højere i september end i september året før.\n\nDen årlige stigning var 23,8 procent i august. Fra august til september steg dieselpriserne med 5,9 procent og benzinpriserne med 6,7 procent.\n\nHer er det afgørende at skelne mellem år og måned. De 31,4 procent er ikke en prisstigning på én måned, og tallet gælder en bestemt varegruppe, ikke den samlede inflation.\n\nNår transport bliver dyrere, kan husholdninger få mindre plads til andre køb. Virksomhedernes påvirkning afhænger blandt andet af energiforbrug og mulighederne for at sende omkostninger videre.\n\nHold derfor øje med, om prispresset varer ved og breder sig. Denne statistik kan ikke alene afgøre centralbankernes næste rentebeslutning.\n\nDAGENS VIGTIGSTE POINTE\n\nBeskæftigelse kan støtte efterspørgslen, mens energiudgifter presser købekraften og gæld gør finansieringsvilkår vigtige.\n\nFor investoren er opgaven at undersøge begge sider af regnestykket: Hvad understøtter indtægterne, og hvad kan spise dem op? Et positivt aktivitetstal er ikke i sig selv et løfte om højere indtjening.",
+  "sources": [
+    {
+      "headline": "Dansk beskæftigelse i august",
+      "urls": [
+        "https://www.dst.dk/da/Statistik/udgivelser/NytHtml?cid=52371"
+      ],
+      "event_date": "2026-10-21",
+      "source_date": "2026-10-21",
+      "core_fact": "Offentliggjort 21. oktober 2026; august 2026: +3.600 lønmodtagere til ca. 3.095.300; +29.600 årligt.",
+      "evidence": {
+        "url": "https://www.dst.dk/da/Statistik/udgivelser/NytHtml?cid=52371",
+        "verified": true,
+        "checked_at": "2026-10-22T12:40:28+02:00",
+        "excerpt": "Lønmodtagerbeskæftigelsen steg i august med 3.600 personer. I august havde 3.095.300 personer et lønmodtagerjob.",
+        "supported_claims": [
+          "Offentliggjort 21. oktober 2026; august 2026: +3.600 lønmodtagere til ca. 3.095.300; +29.600 årligt.",
+          "Virksomheder og organisationer +2.000, offentlig forvaltning og service +1.600; industri faldt fra juli; foreløbige sæsonkorrigerede tal."
+        ]
+      }
+    },
+    {
+      "headline": "Europæisk offentlig gæld i andet kvartal",
+      "urls": [
+        "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-21102026-bp"
+      ],
+      "event_date": "2026-10-21",
+      "source_date": "2026-10-21",
+      "core_fact": "Offentliggjort 21. oktober 2026, andet kvartal 2026: euroområdets gæld/BNP 88,8% mod 88,4% i første kvartal; EU 82,9% mod 82,5%.",
+      "evidence": {
+        "url": "https://ec.europa.eu/eurostat/en/web/products-euro-indicators/w/2-21102026-bp",
+        "verified": true,
+        "checked_at": "2026-10-22T12:40:28+02:00",
+        "excerpt": "In the EU, the ratio also increased from 82.5% to 82.9%.",
+        "supported_claims": [
+          "Offentliggjort 21. oktober 2026, andet kvartal 2026: euroområdets gæld/BNP 88,8% mod 88,4% i første kvartal; EU 82,9% mod 82,5%.",
+          "Danmark 27,1%, Frankrig 119,1%, Italien 139,9%; offentlig bruttogæld som andel af BNP."
+        ]
+      }
+    },
+    {
+      "headline": "EU-brændstofpriser i september",
+      "urls": [
+        "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20261021-2"
+      ],
+      "event_date": "2026-10-21",
+      "source_date": "2026-10-21",
+      "core_fact": "Offentliggjort 21. oktober 2026; brændstof og smøremidler til privat transport i EU: september årlig stigning 31,4%, august 23,8%.",
+      "evidence": {
+        "url": "https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20261021-2",
+        "verified": true,
+        "checked_at": "2026-10-22T12:40:28+02:00",
+        "excerpt": "This followed the year-on-year increases of 16.9% in July and 23.8% in August.",
+        "supported_claims": [
+          "Offentliggjort 21. oktober 2026; brændstof og smøremidler til privat transport i EU: september årlig stigning 31,4%, august 23,8%.",
+          "September mod august 2026: diesel +5,9%, benzin +6,7%; dette er ikke samlet inflation."
+        ]
+      }
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "method": "independent_source_review",
+    "reviewed_text": "3 TING INVESTORER SKAL VIDE I DAG\n\nFlere danskere i arbejde. Mere offentlig gæld i Europa. Dyrere brændstof.\n\nOnsdagens tre statistikker peger på en økonomi, hvor indkomster, gæld og omkostninger skal læses sammen. For din opsparing er forbindelsen ret konkret: Virksomheders salg kan få støtte fra beskæftigelsen, samtidig med at højere udgifter presser kunderne.\n\nTallene dækker forskellige perioder. De er nye offentliggørelser, ikke et øjebliksbillede af torsdagens markeder.\n\n1. BESKÆFTIGELSEN VOKSER, MEN INDUSTRIEN GÅR TILBAGE\n\nDanmarks Statistik offentliggjorde 21. oktober, at lønmodtagerbeskæftigelsen steg med 3.600 personer i august. Omkring 3.095.300 havde dermed et lønmodtagerjob. Det er 29.600 flere end et år tidligere.\n\nVirksomheder og organisationer stod for 2.000 af månedens ekstra lønmodtagere. Offentlig forvaltning og service stod for 1.600. Industrien havde derimod færre lønmodtagere end i juli. Tallene er foreløbige og sæsonkorrigerede.\n\nMekanismen er enkel: Flere lønindkomster kan understøtte forbruget og dermed virksomhedernes omsætning. Men det samlede beskæftigelsestal fortæller hverken, at alle brancher har medvind, eller at indtjeningen følger med.\n\nFor en dansk investor er branchefordelingen derfor værd at følge. Næste beskæftigelsestal kan vise, om fremgangen breder sig, eller om det fortsat er bestemte dele af økonomien, der trækker.\n\n2. EUROPAS GÆLD FYLDER MERE\n\nEurostat offentliggjorde også onsdag nye gældstal. Ved udgangen af andet kvartal udgjorde den offentlige bruttogæld 88,8 procent af BNP i euroområdet, mod 88,4 procent i første kvartal. For EU steg andelen fra 82,5 til 82,9 procent.\n\nDanmarks andel var 27,1 procent. Frankrigs var 119,1 procent og Italiens 139,9 procent. Forskellene er store, også inden for samme europæiske økonomi.\n\nGældskvoten måler gæld i forhold til økonomiens størrelse. Den er ikke en opgørelse over næste års renteregning. Hvor hurtigt ændrede markedsrenter slår igennem på statsbudgettet, afhænger blandt andet af, hvornår eksisterende lån skal refinansieres.\n\nDet relevante spørgsmål er derfor, hvor følsom finansieringen er. Hvis dyrere lån gradvist erstatter billigere lån, kan renteudgifterne optage mere af budgettet. Det kan begrænse pladsen til andre udgifter.\n\nFølg derfor både gældens udvikling og finansieringsvilkårene. Gældskvoten alene fortæller ikke, hvor statsobligationernes kurser skal hen.\n\n3. BRÆNDSTOF TAGER EN STØRRE BID\n\nEurostats tredje offentliggørelse viser, at priserne på brændstof og smøremidler til privat transport i EU var 31,4 procent højere i september end i september året før.\n\nDen årlige stigning var 23,8 procent i august. Fra august til september steg dieselpriserne med 5,9 procent og benzinpriserne med 6,7 procent.\n\nHer er det afgørende at skelne mellem år og måned. De 31,4 procent er ikke en prisstigning på én måned, og tallet gælder en bestemt varegruppe, ikke den samlede inflation.\n\nNår transport bliver dyrere, kan husholdninger få mindre plads til andre køb. Virksomhedernes påvirkning afhænger blandt andet af energiforbrug og mulighederne for at sende omkostninger videre.\n\nHold derfor øje med, om prispresset varer ved og breder sig. Denne statistik kan ikke alene afgøre centralbankernes næste rentebeslutning.\n\nDAGENS VIGTIGSTE POINTE\n\nBeskæftigelse kan støtte efterspørgslen, mens energiudgifter presser købekraften og gæld gør finansieringsvilkår vigtige.\n\nFor investoren er opgaven at undersøge begge sider af regnestykket: Hvad understøtter indtægterne, og hvad kan spise dem op? Et positivt aktivitetstal er ikke i sig selv et løfte om højere indtjening.",
+    "unresolved_claims": []
+  },
+  "photo_subject": "European Central Bank building",
+  "cover_title": "JOB, GÆLD OG DYRT BRÆNDSTOF",
+  "cover_subtitle": "Tre nye tal om indkomster og omkostninger"
+}
