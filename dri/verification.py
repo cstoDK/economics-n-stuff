@@ -76,6 +76,8 @@ def verify(data, instant, fetch=read_source):
         age = (instant.date() - source_day).days
         if not 0 <= age <= (9 if data['mode'] == 'weekly' else 3):
             raise RuntimeError('Source publication date is missing, future or stale')
-        if normalize(quote) not in fetch(url):
-            raise RuntimeError('Source excerpt could not be independently retrieved; delivery blocked')
+        print('VERIFY_SOURCE', url, flush=True)
+        page = fetch(url)
+        if normalize(quote) not in page:
+            raise RuntimeError(f'Source excerpt could not be independently retrieved; delivery blocked: {url}')
     return digest(data['facebook_text'])
