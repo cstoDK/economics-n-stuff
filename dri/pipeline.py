@@ -113,6 +113,8 @@ if __name__ == '__main__':
         if args.mode == 'deliver':
             deliver_one(filename)
         policy = json.loads((bridge.ROOT / 'dri/publishing.json').read_text())
-        if args.mode == 'publish' or policy.get('enabled') is True:
+        if policy.get('enabled') is not True:
+            print('PUBLICATION_DISABLED: editorial publication is paused; no Facebook release')
+        else:
             from publishing import publish_one
             publish_one(filename, persist)
