@@ -1,7 +1,9 @@
 {
-  "status": "reserved",
+  "status": "delivered",
   "run_id": "39906687670",
   "date": "2026-10-23",
   "text_sha256": "b23c78e6f54304c7de1c74de09ab422fa737e5fc5dfa1c5fd6f5c4eebf6c2b5b",
-  "verified_text_sha256": "b23c78e6f54304c7de1c74de09ab422fa737e5fc5dfa1c5fd6f5c4eebf6c2b5b"
+  "verified_text_sha256": "b23c78e6f54304c7de1c74de09ab422fa737e5fc5dfa1c5fd6f5c4eebf6c2b5b",
+  "buffer_id": "6adaf27bd447d56a647bb424",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/019b85caa0e9986cc272feaf2a90d946e2543b8a/dri/assets/2026-10-23.jpg"
 }
