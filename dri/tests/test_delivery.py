@@ -51,6 +51,19 @@ class VerificationTests(unittest.TestCase):
 
 
 class DeliveryTests(unittest.TestCase):
+    def test_missing_reviewed_photo_never_reaches_buffer_or_creates_cover(self):
+        instant = datetime(2026, 10, 20, tzinfo=bot.TZ)
+        payload = {"editorial": {"photo_file": "File:Verified photo.jpg"}}
+        with tempfile.TemporaryDirectory() as folder, patch.object(bridge, "OUT", Path(folder)), \
+                patch.object(bridge, "STATE", Path(folder)), \
+                patch.object(bridge, "validate_file", return_value=(instant, payload, "checked")), \
+                patch.object(bridge, "verify"), patch.object(bridge, "commons_photo", return_value=None), \
+                patch.object(bridge, "make_cover") as cover, patch.object(bridge, "draft_in_buffer") as buffer:
+            with self.assertRaisesRegex(RuntimeError, "selected Commons photo"):
+                bridge.prepare("dri/incoming/2026-10-20.json")
+            cover.assert_not_called()
+            buffer.assert_not_called()
+
     def test_draft_only_payload_and_status(self):
         with patch.object(bot, 'find_channel', return_value='channel'), patch.object(bot, 'buffer_graphql', return_value={'createPost': {'post': {'id': 'id', 'status': 'draft'}}}) as api:
             self.assertEqual(bot.draft_in_buffer('test', 'https://image.test/cover.jpg'), 'id')
@@ -78,15 +91,20 @@ class DeliveryTests(unittest.TestCase):
     def test_failure_after_remote_acceptance_never_retries(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
-            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value={'text': 'reviewed', 'verified_text_sha256': v.digest('reviewed')}), patch.object(pipeline, 'persist', return_value='a'*40), patch.object(bridge, 'deliver', side_effect=TimeoutError('response lost')) as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
+            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value=self.prepared_bundle()), patch.object(pipeline, 'persist', return_value='a'*40), patch.object(bridge, 'deliver', side_effect=TimeoutError('response lost')) as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
                 with self.assertRaises(TimeoutError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 with self.assertRaises(RuntimeError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 self.assertEqual(deliver.call_count, 1)
     def test_failed_reservation_push_never_calls_buffer(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
-            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value={'text': 'reviewed', 'verified_text_sha256': v.digest('reviewed')}), patch.object(pipeline, 'persist', side_effect=RuntimeError('push rejected')), patch.object(bridge, 'deliver') as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
+            with patch.object(bridge, 'ROOT', root), patch.object(bridge, 'STATE', root/'dri/state'), patch.object(bridge, 'prepare', return_value=self.prepared_bundle()), patch.object(pipeline, 'persist', side_effect=RuntimeError('push rejected')), patch.object(bridge, 'deliver') as deliver, patch.dict(os.environ, {'GITHUB_RUN_ID': '123'}):
                 with self.assertRaises(RuntimeError): pipeline.deliver_one('dri/incoming/2026-10-20.json')
                 deliver.assert_not_called()
+
+    def prepared_bundle(self):
+        return {'text': 'reviewed', 'verified_text_sha256': v.digest('reviewed'),
+                'editorial_sha256': v.digest('editorial'),
+                'photo': {'title': 'File:Verified photo.jpg', 'sha1': 'photo-hash'}}
 
 if __name__ == '__main__': unittest.main()

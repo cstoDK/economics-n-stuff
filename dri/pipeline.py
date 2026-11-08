@@ -42,7 +42,9 @@ def deliver_one(filename):
     from verification import digest
     record = {'status': 'reserved', 'run_id': os.environ['GITHUB_RUN_ID'], 'date': day,
               'text_sha256': digest(bundle['text']),
-              'verified_text_sha256': bundle['verified_text_sha256']}
+              'verified_text_sha256': bundle['verified_text_sha256'],
+              'editorial_sha256': bundle['editorial_sha256'],
+              'photo': {key: bundle['photo'][key] for key in ('title', 'sha1')}}
     claim.write_text(json.dumps(record, indent=2))
     revision = persist([str(claim.relative_to(bridge.ROOT)), f'dri/assets/{day}.jpg'],
                        f'chore(dri): reserve {day} delivery and save cover')

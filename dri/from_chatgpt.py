@@ -8,8 +8,9 @@ import json
 import re
 import os
 from verification import verify, digest
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
+from editorial import check_history, editorial_digest, validate_editorial
 
 from bot import (
     TZ, ROOT, OUT, ASSETS, now_local, mode_for, validate_result,
@@ -36,7 +37,8 @@ def validate_file(filename: str):
         raise RuntimeError("Mode does not match date / no Saturday edition")
     if data.get("approved") is not True:
         raise RuntimeError("Editorial fact-check not approved, refusing draft")
-    body = validate_result(data, instant)
+    body = validate_result(data, instant, single_story=True)
+    validate_editorial(data, body)
     return instant, data, body
 
 
@@ -49,23 +51,22 @@ def prepare(filename: str):
         return
     verified_hash = verify(data, instant)
     OUT.mkdir(parents=True, exist_ok=True)
-    photo = None
-    try:
-        photo = commons_photo(str(data.get("photo_subject") or "European Central Bank building"))
-    except Exception as e:
-        print("Photo unavailable, using clearly illustrated cover:", e)
-    title = str(data.get("cover_title") or ("UGEN DER GIK" if data["mode"] == "weekly" else "DAGENS MARKEDER"))[:100]
-    subtitle = str(data.get("cover_subtitle") or "Makroøkonomi, renter og finansmarkeder")[:100]
+    photo = commons_photo(data["editorial"]["photo_file"], exact=True)
+    if photo is None:
+        raise RuntimeError("The selected Commons photo is missing or fails license or image requirements")
+    check_history(data, photo, STATE, INCOMING)
     asset = ASSETS / f"{date}.jpg"
-    used = make_cover(title, subtitle, photo, asset)
-    if used:
-        body += ("\n\nArkivfoto: " + used["artist"] + " / Wikimedia Commons (" + used["license"]
-                 + "). Kilde: " + used["page_url"] + ". Licens: " + used["license_url"] + ". Tilpasset med tekst og ramme.")
+    used = make_cover(data["cover_title"], data["cover_subtitle"], photo, asset, require_photo=True)
+    body += (f"\n\nArkivfoto: {used['artist']} / Wikimedia Commons ({used['license']})."
+             f" Kilde: {used['page_url']}."
+             + (f" Licens: {used['license_url']}." if used["license_url"] else "")
+             + " Tilpasset med tekst og ramme.")
     bundle = {
         "date": date, "text": body, "sources": data["sources"],
         "asset": str(asset.relative_to(ROOT)), "photo": used,
         "editorial_review_required": False,
         "verified_text_sha256": verified_hash, "verification": data["verification"],
+        "editorial_sha256": editorial_digest(data),
     }
     (OUT / f"{date}.json").write_text(json.dumps(bundle, ensure_ascii=False, indent=2),encoding="utf-8")
     (OUT / f"{date}.txt").write_text(body,encoding="utf-8")
@@ -81,7 +82,8 @@ def deliver(filename: str):
         print("Already delivered, skipping duplicate.")
         return
     bundle = json.loads((OUT / f"{date}.json").read_text(encoding="utf-8"))
-    if bundle.get("verified_text_sha256") != digest(body):
+    if (bundle.get("verified_text_sha256") != digest(body)
+            or bundle.get("editorial_sha256") != editorial_digest(data)):
         raise RuntimeError("Prepared bundle does not match verified input")
     verify(data, instant)
     claim = STATE / f"{date}.delivery.json"

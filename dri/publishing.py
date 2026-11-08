@@ -4,6 +4,7 @@ import os
 import time
 import from_chatgpt as bridge
 from bot import buffer_graphql, find_channel
+from editorial import editorial_digest
 from verification import digest, verify
 
 POST_FIELDS = '''id status text channelId schedulingType externalLink sentAt
@@ -79,6 +80,8 @@ def publish_one(filename, persist):
         raise RuntimeError('Missing confirmed draft delivery')
     if receipt.get('verified_text_sha256') != digest(body):
         raise RuntimeError('Incoming text differs from the verified delivered edition')
+    if receipt.get('editorial_sha256') != editorial_digest(data) or not receipt.get('photo'):
+        raise RuntimeError('Editorial review or reviewed image differs from the delivered edition')
     channel = check_channel()
     post = get_post(post_id)
     validate_post(post, receipt, channel['id'])

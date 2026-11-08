@@ -10,6 +10,7 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import publishing as p
+from editorial import editorial_digest
 from verification import digest
 
 
@@ -22,8 +23,11 @@ class PublicationTests(unittest.TestCase):
         self.state.mkdir(parents=True)
         self.policy = self.root / 'dri/publishing.json'
         self.policy.write_text(json.dumps({'enabled': True, 'start_date': '2026-10-21'}))
+        self.data = {'editorial': {'photo_file': 'File:Reviewed photo.jpg'},
+                     'cover_title': 'Reviewed cover', 'cover_subtitle': 'Reviewed subtitle'}
         self.receipt = {'status': 'delivered', 'buffer_id': 'recorded',
                         'text_sha256': digest('reviewed'), 'verified_text_sha256': digest('reviewed'),
+                        'editorial_sha256': editorial_digest(self.data), 'photo': {'sha1': 'photo-hash'},
                         'image_url': 'https://cover'}
         (self.state/'2026-10-21.delivery.json').write_text(json.dumps(self.receipt))
         (self.state/'2026-10-21.buffer-id').write_text('recorded')
@@ -33,7 +37,7 @@ class PublicationTests(unittest.TestCase):
         self.sent = dict(self.draft, status='sent', sentAt='2026-10-21T11:00:00Z', externalLink='https://facebook.com/test')
         self.stack.enter_context(patch.object(p.bridge, 'ROOT', self.root))
         self.stack.enter_context(patch.object(p.bridge, 'STATE', self.state))
-        self.stack.enter_context(patch.object(p.bridge, 'validate_file', return_value=(datetime(2026,10,21), {}, 'reviewed')))
+        self.stack.enter_context(patch.object(p.bridge, 'validate_file', return_value=(datetime(2026,10,21), self.data, 'reviewed')))
         self.stack.enter_context(patch.dict(os.environ, {'GITHUB_RUN_ID': 'test'}))
         self.channel = self.stack.enter_context(patch.object(p, 'check_channel', return_value={'id': 'dri'}))
         self.get = self.stack.enter_context(patch.object(p, 'get_post', side_effect=[self.draft, self.draft, self.sent]))
@@ -74,6 +78,13 @@ class PublicationTests(unittest.TestCase):
     def test_changed_live_cover_blocks(self):
         self.draft['assets'][0]['source'] = 'https://other'
         with self.assertRaises(RuntimeError): self.run_publish()
+        self.mutate.assert_not_called()
+
+    def test_changed_editorial_review_blocks(self):
+        self.data['editorial']['photo_file'] = 'File:Different photo.jpg'
+        with self.assertRaisesRegex(RuntimeError, 'Editorial review'):
+            self.run_publish()
+        self.channel.assert_not_called()
         self.mutate.assert_not_called()
 
     def test_wrong_channel_blocks(self):

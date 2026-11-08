@@ -1,59 +1,32 @@
-# Kontrakt for den eksisterende ChatGPT-opgave
+# DRI-redaktionen
 
-Tid: mandag–fredag og søndag 07.30 Europe/Copenhagen, aldrig lørdag.
-Brug kun inkluderet ChatGPT-webresearch, ingen betalte API'er.
-Brugeren godkendte 21. oktober 2026 automatisk offentliggørelse på Facebook-siden
-Den Rationelle Investor, inklusive dagens verificerede opslag. Det erstatter det
-tidligere krav om kun kladder. Der kræves ikke manuel godkendelse af hvert opslag.
-Manglende kildeverifikation blokerer fortsat både levering og offentliggørelse.
+Opgaven undersøger historier mandag til fredag og søndag kl. 07.30 dansk tid. Udgiv højst tre gange inden for syv kalenderdage og spring kørselen over, når der ikke er en stærk historie. Brug inkluderet webresearch og den tilsluttede GitHub-app. Den eksisterende kæde udgiver automatisk på Facebook efter bestået kontrol.
 
-1. Læs først dagens `dri/incoming/YYYY-MM-DD.json` og `dri/state/YYYY-MM-DD.buffer-id`
-   eller `.delivery.json`. Eksisterende kvittering/reservation: opret ikke igen.
-   Eksisterende incoming-fil uden state: læs den tilhørende Actions-kørsel.
-   Kun hvis den er afsluttet med kilde-/valideringsfejl FØR reservation og Buffer,
-   må samme fil revideres én gang med ny fuld kildekontrol og aktuel blob-SHA.
-   Ved uklar, igangværende eller tidligere levering: stop og rapportér afstemningsbehov.
-2. Research 3–5 væsentlige nye historier på hverdage, med Danmark/Europa først.
-   450–700 ord, "X TING INVESTORER SKAL VIDE I DAG", slut med "DAGENS VIGTIGSTE POINTE".
-   Søndag: 3–4 forbundne udviklinger fra seneste handelsuge, 400–550 ord med
-   "UGEN DER GIK: [tese]", ét sammenhængende narrativ, ingen isolerede historier.
-3. Åbn og læs direkte kilder. Kontrollér alle aktuelle tal, datoer og udsagn.
-   Skeln hændelse fra udgivelse, fakta fra fortolkning. Ingen em dash eller hype.
-   Foretag derefter en særskilt kritisk kontrol af den præcise færdige tekst.
-4. Opret kun JSON efter bestået kontrol. Hvis et centralt udsagn ikke kan bekræftes,
-   er levering blokeret. Der må aldrig indsættes opdigtede kildebeviser.
+## Vælg én historie
 
-JSON-felter:
-- `date`: dagens dato i København; `mode`: `daily`/`weekly`; `approved`: boolsk true.
-- `facebook_text`: færdig ren tekst, ingen kilde-tags/URL'er.
-- `sources`: mindst tre objekter med `headline`, `urls`, `event_date`, `source_date`,
-  `core_fact` og `evidence`.
-- `evidence`: `url` (en af historiens urls), `verified`: true,
-  `checked_at` (dagens ISO-tidsstempel med +02:00/+01:00), `excerpt` (ordret,
-  mindst 20 tegn og højst 25 ord, fra den læste artikel) og `supported_claims`
-  (liste over samtlige konkrete påstande, som er kontrolleret mod kilden).
-- `verification`: `status`: `passed`, `method`: `independent_source_review`,
-  `reviewed_text`: en nøjagtig kopi af `facebook_text`, `unresolved_claims`: [].
-- `photo_subject`, `cover_title` (max 60 tegn), `cover_subtitle` (max 80 tegn).
+- Find en ny, konkret beslutning, regelændring eller udvikling, der flytter noget for en dansk opsparer. Prioritér Danmark og Europa. Se efter incitamenter, markedsstruktur, pension, omkostninger, hvem der får gevinsten, og hvem der betaler. En kursbevægelse eller en samling almindelige nøgletal er ikke en historie i sig selv.
+- Åbn de seneste 30 dages `dri/state/*.publication.json` og tilhørende `dri/incoming/*.json`. Kontrollér, at vinkel, rubrik og foto tilfører noget nyt. En opfølgning kræver en faktisk ny beslutning eller konsekvens.
+- Skriv ét sammenhængende opslag på 260–550 ord. Navngiv den konkrete aktør og beslutning tidligt. Forklar mekanismen trin for trin, brug præcise tal og korte afsnit, og vis den håndgribelige konsekvens for læseren. Giv en modforklaring, når den ændrer vurderingen. Slut nøgternt. Søndag kan samle flere udviklinger, hvis de forklarer samme pointe fra den afsluttede uge.
+- Undgå faste nummererede nyhedsoversigter, gentagne indledninger, skabelonafslutninger, reklamesprog, emojis, tankestreger og udråbstegn. Opfind aldrig personlige oplevelser, beholdninger, anbefalinger eller citater på afsenderens vegne. Hvis rubrikken eller mekanismen kan flyttes direkte til en anden historie, så omskriv eller spring over.
+- Se det konkrete foto på Wikimedia Commons. Vælg et dokumentarfoto af et specifikt sted, en aktør eller et objekt i historien. Billedet skal have en tydelig redaktionel funktion, mindst 850 × 650 px og fri licens CC BY, CC0 eller public domain med ophavsangivelse. Brug et præcist `File:`-navn i JPEG, PNG eller WebP. Arkivfoto skal fremstå som arkivfoto. Spring over, hvis kun et generisk børsfoto, en aktiekurve, et AI-billede eller et tidligere brugt foto passer.
 
-Brug åbne HTML-primærkilder på domæner tilladt i `dri/bot.py`, fx ECB, Eurostat,
-Nationalbanken, Danmarks Statistik og Fed. Reuters/FT/Bloomberg kan give researchspor,
-men må ikke være den eneste evidence-URL: deres adgangskontrol kan blokere Actions.
-Workflow genhenter uddraget. Find en anden historie hvis primærbeviset ikke er tilgængeligt.
-Et uddrag er et kontrollerbart kildebevis, ikke dokumentation for alt i sig selv.
-Dæk alle påstande i den redaktionelle gennemgang. Daglige datoer: højst tre dage
-gamle; søndag: højst ni. Ingen fremtidige hændelser som allerede indtrufne fakta.
+## Gennemgå den færdige tekst og det valgte foto
 
-Skriv gennem GitHub-connectoren til `cstoDK/economics-n-stuff`, main, den ene
-incoming-fil. Opdater ikke kode, workflow eller state fra research-opgaven.
-Kontrollér faktisk filindhold/commit og den tilhørende Actions-kørsel.
-GitHub Actions opretter først en intern Buffer-kladde, gemmer dens ID, genkontrollerer
-kilder og præcist indhold og udgiver derefter automatisk det samme opslag på DRI.
-Rapportér kun offentliggjort ved `.publication.json` med status `sent`, Buffer-ID
-og udgivelsestidspunkt, helst med Facebook-link. En kladde eller filskrivning er
-ikke afsluttet offentliggørelse. Hvis noget fejler, giv præcis blokering og kørselslink.
-Ingen blind gentagelse efter usikker levering og ingen kopier af opgaven.
-Ved eksisterende Buffer-ID: aflæs også `.publication.json` og Actions-status;
-opret aldrig en ny fil eller et nyt opslag for at forsøge igen.
+Gennemfør først et separat faktatjek. Åbn 2–5 forskellige, direkte og maskinlæselige HTML-kilder fra domæner tilladt i `dri/bot.py`. Vælg primærkilder til de centrale udsagn. Kontrollér tal, datoer, navne, beslutninger og citater. Skeln mellem begivenhed og kildeudgivelse samt mellem fakta og fortolkning. Hændelses- og kildedato skal ligge højst tre dage tilbage på hverdage og højst ni dage tilbage søndag. En fremtidig hændelse må ikke være beskrevet som indtruffet.
 
-Find Actions via GitHub fetch på `https://api.github.com/repos/cstoDK/economics-n-stuff/actions/runs?head_sha=COMMIT_SHA` (erstat med faktisk commit), derefter jobs og logs. Brug ikke kun den PR-filtrerede commit-workflow-funktion. Filskrivning kan være afsluttet før kørslen fremgår; kontrollér igen efter en kort ventetid.
+Gennemfør derefter en separat redaktionel gennemlæsning af præcis den færdige tekst og det præcise billede. Begrund konkret hvad der er nyt, hvilken mekanisme teksten forklarer, hvad læseren får ud af den, og hvorfor netop dette foto hører til. Et manglende eller svagt svar stopper leveringen.
+
+## JSON ved bestået kontrol
+
+- `date` er dagens dato i København, `mode` er `daily` på hverdage eller `weekly` søndag, og `approved` er boolsk `true`.
+- `facebook_text` er den færdige tekst med en selvstændig rubrik på første linje. Brug almindelig tekst uden URL’er eller kildetags.
+- `sources` indeholder 2–5 objekter med `headline`, `urls`, `event_date`, `source_date`, `core_fact` og `evidence`. Hvert `evidence` har en direkte læst `url` fra `urls`, `verified: true`, `checked_at` som dagens ISO-tid med dansk tidszoneoffset, et ordret `excerpt` på mindst 20 tegn og højst 25 ord samt `supported_claims` med kontrollerede påstande. Kørselen genhenter de nøjagtige uddrag og stopper ved afvigelser. Et uddrag erstatter aldrig kontrollen af den fulde tekst.
+- `verification` har `status: "passed"`, `method: "independent_source_review"`, `reviewed_text` som en nøjagtig kopi af `facebook_text` og `unresolved_claims: []`.
+- `editorial` har `status: "passed"`, `story_key`, `new_development`, `mechanism`, `reader_relevance`, `image_relevance` og `photo_file`. Brug en stabil, specifik nøgle på 3–10 led adskilt af bindestreger med små ASCII-bogstaver og tal. Brug samme nøgle for samme begivenhed, også ved en ny rubrik. Hver af de fire begrundelser er en konkret sætning på 20–500 tegn. `photo_file` er det præcise Commons-filnavn inklusive `File:`, uden URL, fragment eller billedtekst.
+- `cover_title` og `cover_subtitle` er korte og konkrete, henholdsvis 8–60 og 8–80 tegn, på én linje hver.
+
+## Aflever og kontrollér
+
+1. Se efter dagens `dri/incoming/YYYY-MM-DD.json`, `dri/state/YYYY-MM-DD.buffer-id`, `.delivery.json` og `.publication.json` før en filskrivning. En kvittering eller reservation betyder stop. Eksisterende input uden reservation må kun rettes én gang efter bekræftet, afsluttet validerings- eller kildefejl før Buffer. Brug den aktuelle blob-SHA og kør hele kontrollen igen. Uklar leveringsstatus betyder stop og afstemning.
+2. Ved bestået kontrol afleveres den ene UTF-8-JSON-fil i `dri/incoming` på `main` i `cstoDK/economics-n-stuff` gennem GitHub-appen. Opgaven må kun skrive denne fil.
+3. Genlæs fil og commit. Find kørselen via `https://api.github.com/repos/cstoDK/economics-n-stuff/actions/runs?head_sha=COMMIT_SHA`, derefter jobs og logs. Vent kort og tjek igen, hvis kørslen endnu ikke er synlig. Kontrollér den faktiske `.publication.json`. Rapportér kun offentliggjort ved `sent` med Buffer-ID og `sent_at`. Medtag Facebook-linket, når det findes. Ved teknisk fejl rapporteres den præcise blokering og kørslens link. Ved redaktionelt fravalg oprettes ingen fil, og resultatet kan holdes til én linje.

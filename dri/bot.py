@@ -116,7 +116,7 @@ KLADDE:
 {json.dumps(draft, ensure_ascii=False)}'''
 
 
-def validate_result(result: dict, instant: datetime):
+def validate_result(result: dict, instant: datetime, *, single_story=False):
     if not result.get("approved"):
         raise RuntimeError("Faktatjek afviste kladde: " + str(result.get("issues")))
     text = result.get("facebook_text", "")
@@ -125,9 +125,9 @@ def validate_result(result: dict, instant: datetime):
     if "—" in text or "" in text:
         raise RuntimeError("Opslaget indeholder citation-tags eller em dash.")
     sources = result.get("sources", [])
-    expected_min = 3
+    expected_min = 2 if single_story else 3
     if len(sources) < expected_min:
-        raise RuntimeError("For få dokumenterede nyhedshistorier")
+        raise RuntimeError("For få dokumenterede kilder")
     for item in sources:
         urls = item.get("urls", [])
         if not urls or not any(is_trusted(url) for url in urls):
@@ -139,7 +139,7 @@ def validate_result(result: dict, instant: datetime):
             raise RuntimeError("Ugyldig begivenhedsdato i kildekontrol")
         if d > instant.astimezone(TZ).date() + timedelta(days=1):
             raise RuntimeError("Fremtidig begivenhedsdato, faktatjek skal gennemgås")
-    if mode_for(instant) == "daily" and "INVESTORER" not in text.upper():
+    if not single_story and mode_for(instant) == "daily" and "INVESTORER" not in text.upper():
         raise RuntimeError("Mangler genkendelig daglig rubrik")
     return text
 
@@ -148,14 +148,17 @@ def strip_html(fragment):
     return html.unescape(re.sub("<[^>]*>", "", fragment or "")).strip()
 
 
-def commons_photo(subject: str):
+def commons_photo(subject: str, *, exact=False):
     # Use only free-to-derivate licenses where attribution can be embedded and posted.
-    searches = [subject, "European Central Bank building", "European Parliament building", "Frankfurt stock exchange"]
+    lookups = [{"titles": subject}] if exact else [
+        {"generator": "search", "gsrsearch": search + " filetype:bitmap",
+         "gsrnamespace": 6, "gsrlimit": 16}
+        for search in (subject, "European Central Bank building", "European Parliament building", "Frankfurt stock exchange")
+    ]
     candidates = []
-    for search in searches:
+    for lookup in lookups:
         payload = api_request(COMMONS_ENDPOINT, method="GET", timeout=40, params={
-            "action": "query", "generator": "search", "gsrsearch": search + " filetype:bitmap",
-            "gsrnamespace": 6, "gsrlimit": 16, "prop": "imageinfo", "iiprop": "url|size|extmetadata",
+            "action": "query", **lookup, "prop": "imageinfo", "iiprop": "url|size|extmetadata|sha1|mime",
             "iiurlwidth": 1500, "format": "json", "formatversion": 2,
         })
         for page in payload.get("query", {}).get("pages", []):
@@ -170,6 +173,10 @@ def commons_photo(subject: str):
             src = info.get("thumburl") or info.get("url", "")
             if not src.startswith("https://") or info.get("width", 0) < 850 or info.get("height", 0) < 650:
                 continue
+            if exact and (page.get("ns") != 6 or urlparse(src).hostname != "upload.wikimedia.org"
+                          or info.get("mime") not in {"image/jpeg", "image/png", "image/webp"}
+                          or not info.get("sha1")):
+                continue
             rights_url = strip_html(meta.get("LicenseUrl", {}).get("value", ""))
             artist = strip_html(meta.get("Artist", {}).get("value", ""))
             if not artist or (normalized.startswith("ccby") and not rights_url.startswith("https://creativecommons.org/licenses/by/")):
@@ -180,6 +187,7 @@ def commons_photo(subject: str):
                 "license": license_name, "license_url": rights_url,
                 "artist": artist or "Wikimedia Commons",
                 "kind": "archive_photo",
+                "sha1": info.get("sha1"),
             }
             height_ratio = info.get("height", 1) / info.get("width", 1)
             score = (10 if height_ratio >= 1.15 else 0) + (3 if height_ratio >= .9 else 0)
@@ -216,7 +224,7 @@ def wrap_lines(draw, text, ft, max_width):
     return out
 
 
-def make_cover(headline: str, subtitle: str, photo: dict | None, out_file: Path):
+def make_cover(headline: str, subtitle: str, photo: dict | None, out_file: Path, *, require_photo=False):
     image = Image.new("RGB", (1080, 1350), "#f3f0e9")
     draw = ImageDraw.Draw(image)
     ink, accent = "#172d3b", "#b68a41"
@@ -237,9 +245,13 @@ def make_cover(headline: str, subtitle: str, photo: dict | None, out_file: Path)
             image.paste(fill, (0, 145))
             archive_line = f"Arkivfoto: {photo['artist'][:65]} / Wikimedia Commons · {photo['license']}"
         except Exception as exc:
+            if require_photo:
+                raise RuntimeError("The reviewed cover photo could not be rendered") from exc
             print(f"Kunne ikke hente lovligt foto, bruger grafisk forside: {exc}", file=sys.stderr)
             photo = None
     if not photo:
+        if require_photo:
+            raise RuntimeError("No reviewed, licensed cover photo; delivery blocked")
         draw.rectangle((0, 145, 1080, 905), fill="#e6e9e8")
         # Deliberately a graphic, not a representation of a real market chart.
         draw.line((110, 750, 300, 590, 475, 670, 660, 400, 900, 310), fill=ink, width=15, joint="curve")
