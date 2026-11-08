@@ -76,6 +76,23 @@ class EditorialTests(unittest.TestCase):
             self.assertEqual(lookup.call_args.kwargs["params"]["titles"], "File:Missing photo.jpg")
             self.assertNotIn("generator", lookup.call_args.kwargs["params"])
 
+    def test_exact_photo_accepts_commons_thumbnail_and_standard_cc_by_name(self):
+        title = "File:Reviewed photo.jpg"
+        url = "https://thumb.wikimedia.org/wikipedia/commons/thumb/example.jpg"
+        metadata = {
+            "LicenseShortName": {"value": "CC BY 2.0"},
+            "LicenseUrl": {"value": "https://creativecommons.org/licenses/by/2.0/"},
+            "Artist": {"value": "Photographer"},
+        }
+        response = {"query": {"pages": [{"ns": 6, "title": title, "imageinfo": [{
+            "thumburl": url, "mime": "image/jpeg", "sha1": "hash",
+            "width": 5184, "height": 3456, "extmetadata": metadata,
+        }]}]}}
+        with patch.object(bot, "api_request", return_value=response):
+            self.assertEqual(bot.commons_photo(title, exact=True)["url"], url)
+            metadata["LicenseShortName"]["value"] = "CC BY-SA 2.0"
+            self.assertIsNone(bot.commons_photo(title, exact=True))
+
     def test_photo_render_failure_never_produces_fallback_art(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(bot.requests, "get", side_effect=TimeoutError):
             target = Path(folder) / "cover.jpg"

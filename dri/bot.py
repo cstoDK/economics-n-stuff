@@ -167,19 +167,20 @@ def commons_photo(subject: str, *, exact=False):
             license_name = strip_html(meta.get("LicenseShortName", {}).get("value", ""))
             # Explicitly allow only unrestricted licenses or standard CC BY.
             normalized = license_name.lower().replace(" ", "")
-            permitted = (normalized in ("cc0", "publicdomain", "pd") or normalized.startswith("ccby-") or normalized == "ccby")
-            if not permitted or "sa" in normalized or "nc" in normalized or "nd" in normalized:
+            attribution_license = re.fullmatch(r"ccby(?:-?\d+\.\d+)?", normalized)
+            if normalized not in {"cc0", "cc01.0", "publicdomain", "pd"} and not attribution_license:
                 continue
             src = info.get("thumburl") or info.get("url", "")
             if not src.startswith("https://") or info.get("width", 0) < 850 or info.get("height", 0) < 650:
                 continue
-            if exact and (page.get("ns") != 6 or urlparse(src).hostname != "upload.wikimedia.org"
+            if exact and (page.get("ns") != 6
+                          or urlparse(src).hostname not in {"upload.wikimedia.org", "thumb.wikimedia.org"}
                           or info.get("mime") not in {"image/jpeg", "image/png", "image/webp"}
                           or not info.get("sha1")):
                 continue
             rights_url = strip_html(meta.get("LicenseUrl", {}).get("value", ""))
             artist = strip_html(meta.get("Artist", {}).get("value", ""))
-            if not artist or (normalized.startswith("ccby") and not rights_url.startswith("https://creativecommons.org/licenses/by/")):
+            if not artist or (attribution_license and not rights_url.startswith("https://creativecommons.org/licenses/by/")):
                 continue
             record = {
                 "title": page.get("title", ""), "url": src,
