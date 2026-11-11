@@ -1,5 +1,5 @@
 {
-  "status": "reserved",
+  "status": "delivered",
   "run_id": "42973703749",
   "date": "2026-11-11",
   "text_sha256": "df04bd263258e5724a3ea8d95dc2dfc2199fab1292a19558af9f1c4cb2b2cc6e",
@@ -8,5 +8,7 @@
   "photo": {
     "title": "File:1979 $10,000 Treasury Bond .jpg",
     "sha1": "f7ec4f6c4a8b09d71a125cb14ab663fe18e12574"
-  }
+  },
+  "buffer_id": "6af40d57a9d779009b8c342f",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/a7081a23fbdb6b8678f09071845a1d51a3a298c2/dri/assets/2026-11-11.jpg"
 }
