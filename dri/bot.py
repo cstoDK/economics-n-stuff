@@ -168,7 +168,7 @@ def commons_photo(subject: str, *, exact=False):
             # Explicitly allow only unrestricted licenses or standard CC BY.
             normalized = license_name.lower().replace(" ", "")
             attribution_license = re.fullmatch(r"ccby(?:-?\d+\.\d+)?", normalized)
-            if normalized not in {"cc0", "cc01.0", "publicdomain", "pd"} and not attribution_license:
+            if normalized not in {"cc0", "cc01.0", "publicdomain", "pd"}:
                 continue
             src = info.get("thumburl") or info.get("url", "")
             if not src.startswith("https://") or info.get("width", 0) < 850 or info.get("height", 0) < 650:
@@ -226,61 +226,31 @@ def wrap_lines(draw, text, ft, max_width):
 
 
 def make_cover(headline: str, subtitle: str, photo: dict | None, out_file: Path, *, require_photo=False):
-    image = Image.new("RGB", (1080, 1350), "#f3f0e9")
-    draw = ImageDraw.Draw(image)
-    ink, accent = "#172d3b", "#b68a41"
-    draw.rectangle((0, 0, 1080, 145), fill=ink)
-    draw.text((70, 54), "DEN RATIONELLE INVESTOR", fill="#ffffff", font=font(36, True))
-    archive_line = None
-    if photo:
-        try:
-            resp = requests.get(photo["url"], headers={"User-Agent": UA}, timeout=25)
-            resp.raise_for_status()
-            if len(resp.content) > 20_000_000:
-                raise RuntimeError("Photo over size limit")
-            raw = Image.open(BytesIO(resp.content)).convert("RGB")
-            # Preserve full image: letterbox rather than crop people/buildings.
-            fitted = ImageOps.contain(raw, (1080, 760), method=Image.Resampling.LANCZOS)
-            fill = Image.new("RGB", (1080, 760), "#d1d8d9")
-            fill.paste(fitted, ((1080-fitted.width)//2, (760-fitted.height)//2))
-            image.paste(fill, (0, 145))
-            archive_line = f"Arkivfoto: {photo['artist'][:65]} / Wikimedia Commons · {photo['license']}"
-        except Exception as exc:
-            if require_photo:
-                raise RuntimeError("The reviewed cover photo could not be rendered") from exc
-            print(f"Kunne ikke hente lovligt foto, bruger grafisk forside: {exc}", file=sys.stderr)
-            photo = None
-    if not photo:
-        if require_photo:
-            raise RuntimeError("No reviewed, licensed cover photo; delivery blocked")
-        draw.rectangle((0, 145, 1080, 905), fill="#e6e9e8")
-        # Deliberately a graphic, not a representation of a real market chart.
-        draw.line((110, 750, 300, 590, 475, 670, 660, 400, 900, 310), fill=ink, width=15, joint="curve")
-        draw.ellipse((885, 295, 915, 325), fill=accent)
-        draw.text((85, 210), "MAKRO  /  MARKEDER  /  RENTER", fill=ink, font=font(28, True))
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 905, 1080, 1350), fill=ink)
-    draw.rectangle((70, 953, 190, 964), fill=accent)
-    headline = headline.upper()
-    ft = font(62, True)
-    lines = wrap_lines(draw, headline, ft, 940)
-    if len(lines) > 3:
-        ft = font(51, True)
-        lines = wrap_lines(draw, headline, ft, 940)[:3]
-    y = 1000
-    for line in lines:
-        draw.text((70, y), line, font=ft, fill="#ffffff")
-        y += 73
-    sub_ft = font(27)
-    for ln in wrap_lines(draw, subtitle, sub_ft, 940)[:2]:
-        draw.text((70, y + 15), ln, font=sub_ft, fill="#e0d9c9")
-        y += 37
-    if archive_line:
-        # Attribution inside image + full attribution in Facebook copy.
-        draw.rectangle((0, 863, 1080, 905), fill="#172d3b")
-        draw.text((20, 872), archive_line[:108], font=font(19), fill="#ffffff")
-    out_file.parent.mkdir(parents=True, exist_ok=True)
-    image.save(out_file, "JPEG", quality=88, optimize=True)
+    """Save the verified Commons photograph as-is, with no overlay, borders or text.
+
+    Only CC0/public-domain images can be posted without attribution in the Facebook
+    copy. The source URL, title, license and author stay in private audit metadata.
+    """
+    if photo is None:
+        raise RuntimeError("No reviewed Commons photograph; delivery blocked")
+    license_name = re.sub(r"\\s+", "", str(photo.get("license", ""))).lower()
+    if license_name not in {"cc0", "cc01.0", "publicdomain", "pd"}:
+        raise RuntimeError("Photo license requires public attribution; choose CC0 or public domain")
+    try:
+        resp = requests.get(photo["url"], headers={"User-Agent": UA}, timeout=25)
+        resp.raise_for_status()
+        if len(resp.content) > 20_000_000:
+            raise RuntimeError("Photo exceeds size limit")
+        with Image.open(BytesIO(resp.content)) as source:
+            source.verify()
+        with Image.open(BytesIO(resp.content)) as source:
+            if source.width < 850 or source.height < 650:
+                raise RuntimeError("Photo resolution too low")
+            image = source.convert("RGB")
+        out_file.parent.mkdir(parents=True, exist_ok=True)
+        image.save(out_file, "JPEG", quality=92, optimize=True)
+    except Exception as exc:
+        raise RuntimeError("The reviewed Commons photo could not be rendered") from exc
     return photo
 
 
