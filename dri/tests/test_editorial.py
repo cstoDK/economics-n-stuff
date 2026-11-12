@@ -76,7 +76,7 @@ class EditorialTests(unittest.TestCase):
             self.assertEqual(lookup.call_args.kwargs["params"]["titles"], "File:Missing photo.jpg")
             self.assertNotIn("generator", lookup.call_args.kwargs["params"])
 
-    def test_exact_photo_accepts_commons_thumbnail_and_standard_cc_by_name(self):
+    def test_exact_photo_rejects_cc_by_without_public_attribution(self):
         title = "File:Reviewed photo.jpg"
         url = "https://thumb.wikimedia.org/wikipedia/commons/thumb/example.jpg"
         metadata = {
@@ -89,9 +89,27 @@ class EditorialTests(unittest.TestCase):
             "width": 5184, "height": 3456, "extmetadata": metadata,
         }]}]}}
         with patch.object(bot, "api_request", return_value=response):
-            self.assertEqual(bot.commons_photo(title, exact=True)["url"], url)
+            self.assertIsNone(bot.commons_photo(title, exact=True))
             metadata["LicenseShortName"]["value"] = "CC BY-SA 2.0"
             self.assertIsNone(bot.commons_photo(title, exact=True))
+
+    def test_photo_is_saved_without_frame_caption_or_overlays(self):
+        from io import BytesIO
+        from PIL import Image
+        original = Image.new("RGB", (1000, 700), (37, 89, 121))
+        buf = BytesIO()
+        original.save(buf, format="PNG")
+        response = unittest.mock.Mock(content=buf.getvalue())
+        response.raise_for_status.return_value = None
+        with tempfile.TemporaryDirectory() as folder, patch.object(bot.requests, "get", return_value=response):
+            target = Path(folder) / "photo.jpg"
+            bot.make_cover("Ignored title", "Ignored subtitle",
+                           {"url": "https://upload.wikimedia.org/example.png", "license": "Public domain"},
+                           target, require_photo=True)
+            with Image.open(target) as saved:
+                self.assertEqual(saved.size, (1000, 700))
+                self.assertEqual(saved.getpixel((20, 20))[0], 37)
+                self.assertEqual(saved.getpixel((500, 350))[1], 89)
 
     def test_photo_render_failure_never_produces_fallback_art(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(bot.requests, "get", side_effect=TimeoutError):
