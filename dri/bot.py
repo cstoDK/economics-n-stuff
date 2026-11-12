@@ -233,7 +233,7 @@ def make_cover(headline: str, subtitle: str, photo: dict | None, out_file: Path,
     """
     if photo is None:
         raise RuntimeError("No reviewed Commons photograph; delivery blocked")
-    license_name = re.sub(r"\\s+", "", str(photo.get("license", ""))).lower()
+    license_name = re.sub(r"\s+", "", str(photo.get("license", ""))).lower()
     if license_name not in {"cc0", "cc01.0", "publicdomain", "pd"}:
         raise RuntimeError("Photo license requires public attribution; choose CC0 or public domain")
     try:
