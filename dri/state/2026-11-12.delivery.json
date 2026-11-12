@@ -1,5 +1,5 @@
 {
-  "status": "reserved",
+  "status": "delivered",
   "run_id": "43169101156",
   "date": "2026-11-12",
   "text_sha256": "f14a5330e78b087b4394fb7d289a3103ecef4fc0802a6fcd934fdbf8301fc9d3",
@@ -8,5 +8,7 @@
   "photo": {
     "title": "File:Scott Bessent meets He Lifeng in Geneva (2025).jpg",
     "sha1": "4efd06ee8b546e0a8cfd418a500e3e70f724b362"
-  }
+  },
+  "buffer_id": "6af55e339539b54d8824f124",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/eb8a4cc1b0c937054b2909d70da3b461101cca4c/dri/assets/2026-11-12.jpg"
 }
