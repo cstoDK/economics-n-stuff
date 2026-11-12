@@ -57,10 +57,8 @@ def prepare(filename: str):
     check_history(data, photo, STATE, INCOMING)
     asset = ASSETS / f"{date}.jpg"
     used = make_cover(data["cover_title"], data["cover_subtitle"], photo, asset, require_photo=True)
-    body += (f"\n\nArkivfoto: {used['artist']} / Wikimedia Commons ({used['license']})."
-             f" Kilde: {used['page_url']}."
-             + (f" Licens: {used['license_url']}." if used["license_url"] else "")
-             + " Tilpasset med tekst og ramme.")
+    # Keep all source and image-license metadata in the internal JSON audit bundle.
+    # The Facebook caption is exactly the independently verified editorial text.
     bundle = {
         "date": date, "text": body, "sources": data["sources"],
         "asset": str(asset.relative_to(ROOT)), "photo": used,
