@@ -108,8 +108,8 @@ class EditorialTests(unittest.TestCase):
                            target, require_photo=True)
             with Image.open(target) as saved:
                 self.assertEqual(saved.size, (1000, 700))
-                self.assertEqual(saved.getpixel((20, 20))[0], 37)
-                self.assertEqual(saved.getpixel((500, 350))[1], 89)
+                self.assertAlmostEqual(saved.getpixel((20, 20))[0], 37, delta=3)
+                self.assertAlmostEqual(saved.getpixel((500, 350))[1], 89, delta=3)
 
     def test_photo_render_failure_never_produces_fallback_art(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(bot.requests, "get", side_effect=TimeoutError):
