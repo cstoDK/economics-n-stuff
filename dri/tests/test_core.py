@@ -22,13 +22,13 @@ class Tests(unittest.TestCase):
         self.assertFalse(is_trusted("https://reuters.com.evil.com/example"))
     def test_json(self):
         self.assertEqual(parse_json('{"a":1}'),{"a":1})
-    def test_cover(self):
+    def test_cover_requires_a_verified_photo(self):
         import tempfile
-        from PIL import Image
         with tempfile.TemporaryDirectory() as folder:
             path=Path(folder)/"cover.jpg"
-            make_cover("DAGENS MARKEDER","Makro og renter",None,path)
-            with Image.open(path) as im: self.assertEqual(im.size,(1080,1350))
+            with self.assertRaisesRegex(RuntimeError, "No reviewed Commons photograph"):
+                make_cover("DAGENS MARKEDER", "Makro og renter", None, path)
+            self.assertFalse(path.exists())
 
 if __name__=="__main__":
     unittest.main()
