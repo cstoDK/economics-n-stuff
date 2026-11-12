@@ -115,6 +115,6 @@ class EditorialTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder, patch.object(bot.requests, "get", side_effect=TimeoutError):
             target = Path(folder) / "cover.jpg"
             with self.assertRaisesRegex(RuntimeError, "could not be rendered"):
-                bot.make_cover("Titel", "Undertitel", {"url": "https://upload.wikimedia.org/photo"}, target,
+                bot.make_cover("Titel", "Undertitel", {"url": "https://upload.wikimedia.org/photo", "license": "CC0"}, target,
                                require_photo=True)
             self.assertFalse(target.exists())
