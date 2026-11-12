@@ -1,0 +1,12 @@
+{
+  "status": "reserved",
+  "run_id": "43169101156",
+  "date": "2026-11-12",
+  "text_sha256": "f14a5330e78b087b4394fb7d289a3103ecef4fc0802a6fcd934fdbf8301fc9d3",
+  "verified_text_sha256": "13b051cd475232919809de757d6a096ee0ef677e921a9c4e988a1f78be519c91",
+  "editorial_sha256": "456f99de8b36f5b768dbfed9d5045d23b0f53de5d0b3e6c7502de9a7e6fd1532",
+  "photo": {
+    "title": "File:Scott Bessent meets He Lifeng in Geneva (2025).jpg",
+    "sha1": "4efd06ee8b546e0a8cfd418a500e3e70f724b362"
+  }
+}
