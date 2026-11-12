@@ -12,7 +12,7 @@ Den Rationelle Investor skriver om geopolitik og finansielle markeder i et globa
 - Åbn de seneste 30 dages `dri/state/*.publication.json` og tilhørende `dri/incoming/*.json`. Kontrollér, at vinkel, rubrik og foto tilfører noget nyt. En opfølgning kræver en faktisk ny beslutning eller konsekvens.
 - Skriv ét sammenhængende opslag på 260–550 ord. Navngiv den konkrete aktør og beslutning tidligt. Forklar mekanismen trin for trin, brug præcise tal og korte afsnit, og forklar, hvad udviklingen betyder for markedets prissætning eller risici. Skeln mellem det observerede, markedets mulige fortolkning og din egen tese. Nævn en konkret modforklaring eller et datapunkt, der kan ændre tesen. Slut nøgternt. Søndag kan samle flere udviklinger, hvis de forklarer samme pointe fra den afsluttede uge.
 - Undgå faste nummererede nyhedsoversigter, gentagne indledninger, skabelonafslutninger, reklamesprog, emojis, tankestreger og udråbstegn. Opfind aldrig personlige oplevelser, beholdninger, anbefalinger eller citater på afsenderens vegne. Hvis rubrikken eller mekanismen kan flyttes direkte til en anden historie, så omskriv eller spring over.
-- Se det konkrete foto på Wikimedia Commons. Vælg et dokumentarfoto af et specifikt sted, en aktør eller et objekt i historien. Billedet skal have en tydelig redaktionel funktion, mindst 850 × 650 px og fri licens CC BY, CC0 eller public domain med ophavsangivelse. Brug et præcist `File:`-navn i JPEG, PNG eller WebP. Arkivfoto skal fremstå som arkivfoto. Spring over, hvis kun et generisk børsfoto, en aktiekurve, et AI-billede eller et tidligere brugt foto passer.
+- Se det konkrete foto på Wikimedia Commons. Vælg et dokumentarfoto af et specifikt sted, en aktør eller et objekt i historien. Billedet skal have en tydelig redaktionel funktion, mindst 850 × 650 px og licensen CC0 eller public domain, der ikke kræver synlig kreditering. Kilde, fotograf og licens gemmes kun i den interne dokumentation. Brug et præcist `File:`-navn i JPEG, PNG eller WebP. Arkivfoto skal fremstå som arkivfoto. Spring over, hvis kun et generisk børsfoto, en aktiekurve, et AI-billede eller et tidligere brugt foto passer.
 
 ## Gennemgå den færdige tekst og det valgte foto
 
@@ -23,11 +23,11 @@ Gennemfør derefter en separat redaktionel gennemlæsning af præcis den færdig
 ## JSON ved bestået kontrol
 
 - `date` er dagens dato i København, `mode` er `daily` på hverdage eller `weekly` søndag, og `approved` er boolsk `true`.
-- `facebook_text` er den færdige tekst med en selvstændig rubrik på første linje. Brug almindelig tekst uden URL’er eller kildetags.
+- `facebook_text` er den færdige tekst med en selvstændig rubrik på første linje. Brug almindelig tekst uden URL’er, kildetags, fotokreditering eller kildehenvisninger. Kilder og licensoplysninger bruges kun til kontrol og interne kvitteringer.
 - `sources` indeholder 2–5 objekter med `headline`, `urls`, `event_date`, `source_date`, `core_fact` og `evidence`. Hvert `evidence` har en direkte læst `url` fra `urls`, `verified: true`, `checked_at` som dagens ISO-tid med dansk tidszoneoffset, et ordret `excerpt` på mindst 20 tegn og højst 25 ord samt `supported_claims` med kontrollerede påstande. Kørselen genhenter de nøjagtige uddrag og stopper ved afvigelser. Et uddrag erstatter aldrig kontrollen af den fulde tekst.
 - `verification` har `status: "passed"`, `method: "independent_source_review"`, `reviewed_text` som en nøjagtig kopi af `facebook_text` og `unresolved_claims: []`.
 - `editorial` har `status: "passed"`, `story_key`, `new_development`, `mechanism`, `reader_relevance`, `image_relevance` og `photo_file`. Brug en stabil, specifik nøgle på 3–10 led adskilt af bindestreger med små ASCII-bogstaver og tal. Brug samme nøgle for samme begivenhed, også ved en ny rubrik. Hver af de fire begrundelser er en konkret sætning på 20–500 tegn. `reader_relevance` forklarer betydningen for prissætning eller risiko på et navngivet marked. `photo_file` er det præcise Commons-filnavn inklusive `File:`, uden URL, fragment eller billedtekst.
-- `cover_title` og `cover_subtitle` er korte og konkrete, henholdsvis 8–60 og 8–80 tegn, på én linje hver.
+- `cover_title` og `cover_subtitle` er korte og konkrete, henholdsvis 8–60 og 8–80 tegn, på én linje hver. Disse felter er kun metadata og må ikke lægges oven på billedet. Det verificerede Commons-foto publiceres alene, i sine oprindelige proportioner, uden ramme, baggrund, tekst, logo, vandmærke eller genereret illustration.
 
 ## Aflever og kontrollér
 
