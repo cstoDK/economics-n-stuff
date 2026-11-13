@@ -16,7 +16,7 @@ def get_post(post_id):
                           + POST_FIELDS + ' } }', {'input': {'id': post_id}})['post']
 
 
-def check_channel():
+def check_channel(*, require_publishable=True):
     channel = buffer_graphql('''query($input: ChannelInput!) {
       channel(input: $input) { id name displayName service type externalLink
         isDisconnected isLocked isQueuePaused allowedActions }
@@ -24,10 +24,13 @@ def check_channel():
     names = ' '.join(str(channel.get(k) or '') for k in ('name', 'displayName')).casefold()
     if channel['service'] != 'facebook' or 'rationelle investor' not in names:
         raise RuntimeError('Publication target is not the DRI Facebook channel')
-    if channel['isDisconnected'] or channel['isLocked'] or channel['isQueuePaused']:
-        raise RuntimeError('DRI channel disconnected, locked or paused; publication blocked')
-    if 'scheduleUpdates' not in channel['allowedActions']:
-        raise RuntimeError('Buffer connection lacks permission to publish on DRI')
+    # A read-only audit must still work when the channel is intentionally paused
+    # or disconnected. Publishing retains the strict check below.
+    if require_publishable:
+        if channel['isDisconnected'] or channel['isLocked'] or channel['isQueuePaused']:
+            raise RuntimeError('DRI channel disconnected, locked or paused; publication blocked')
+        if 'scheduleUpdates' not in channel['allowedActions']:
+            raise RuntimeError('Buffer connection lacks permission to publish on DRI')
     return channel
 
 
