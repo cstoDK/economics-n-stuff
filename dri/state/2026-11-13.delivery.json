@@ -1,5 +1,5 @@
 {
-  "status": "reserved",
+  "status": "delivered",
   "run_id": "43381939993",
   "date": "2026-11-13",
   "text_sha256": "63fa3a64f8177a127428ec3afe7cd67653a7467bc120447191170174f1cedd68",
@@ -8,5 +8,7 @@
   "photo": {
     "title": "File:JensenHuangSC18.jpg",
     "sha1": "74dfb2af0a807b95e42294313c2358bea7448677"
-  }
+  },
+  "buffer_id": "6af6b437ba218f32638371d3",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/54679dc2ae3794c9a8d17434b2b61d450f8e2eb2/dri/assets/2026-11-13.jpg"
 }
