@@ -82,7 +82,7 @@ def audit():
             raise RuntimeError('Audit pagination limit reached')
     from publishing import check_channel, get_post
     from verification import digest
-    channel = check_channel()
+    channel = check_channel(require_publishable=False)
     for post_id in expected:
         live = get_post(post_id)
         found[post_id] = {k: live[k] for k in ('id', 'status', 'assets', 'externalLink', 'sentAt', 'schedulingType')}
