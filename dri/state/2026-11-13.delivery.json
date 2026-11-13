@@ -1,0 +1,12 @@
+{
+  "status": "reserved",
+  "run_id": "43381939993",
+  "date": "2026-11-13",
+  "text_sha256": "63fa3a64f8177a127428ec3afe7cd67653a7467bc120447191170174f1cedd68",
+  "verified_text_sha256": "63fa3a64f8177a127428ec3afe7cd67653a7467bc120447191170174f1cedd68",
+  "editorial_sha256": "cd6fed54a19de0b9dcfccb6d0506324c76bd1d555ba46edbacbf952f1d434c2e",
+  "photo": {
+    "title": "File:JensenHuangSC18.jpg",
+    "sha1": "74dfb2af0a807b95e42294313c2358bea7448677"
+  }
+}
