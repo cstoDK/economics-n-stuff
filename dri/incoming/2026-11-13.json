@@ -1,0 +1,64 @@
+{
+  "date": "2026-11-13",
+  "mode": "daily",
+  "approved": true,
+  "facebook_text": "KAN JENSEN HUANGS AFGANG PUNKTERE AI-BOBLEN?\n\nNvidias medstifter Jensen Huang er trådt tilbage som topchef og bestyrelsesmedlem. Selskabet bekræftede nyheden torsdag den 12. november. Finansdirektør Colette Kress overtager midlertidigt, mens Nvidia søger en permanent afløser.\n\nDet er et ledelseschok i virksomheden, der er blevet symbolet på de enorme investeringer i kunstig intelligens. På Nasdaq Dorsey Wrights kursoversigt stod Nvidia-aktien i 166,19 dollar den 12. november.\n\nMen har Huangs privatliv virkelig punkteret AI-boblen?\n\nDet spørgsmål blander to forskellige risici sammen.\n\nDen første er risikoen ved at miste en usædvanligt vigtig grundlægger. Huang har ikke kun stået i spidsen for Nvidia. Han har været med til at forme investorernes fortælling om, hvorfor flere og flere datacentre, chips og AI-modeller er værd at finansiere. Når han forsvinder, stiger usikkerheden om strategien, kundeforholdene og kapitalanvendelsen.\n\nDen anden er risikoen ved selve AI-investeringerne. Uanset hvem der leder Nvidia, skal kunderne på et tidspunkt tjene nok på deres AI-systemer til at forsvare milliardinvesteringerne i regnekraft. Hvis deres forventede indtjening svækkes, kan efterspørgslen efter chips falde, og så kan aktiekurserne blive presset langt mere end af en enkelt persons afgang.\n\nDet interessante er derfor ikke at gætte på, hvor meget af kursudviklingen der skyldes skandalen. AI-investeringernes finansiering er i sig selv en kilde til usikkerhed. Huangs afgang kan fungere som katalysator, men det er ikke bevis for, at teknologien eller forretningsmodellen er brudt sammen.\n\nModargumentet er stærkt: Nvidia har stadig sin teknologi, sine medarbejdere og sine kunder. Kress har været finansdirektør siden 2013. Et lederskifte behøver ikke at ændre chipordrerne fra den ene dag til den anden.\n\nDen 17. november kommer Nvidias næste kvartalsregnskab. Det bliver en mere direkte prøve på AI-efterspørgslen end endnu en overskrift om Huangs privatliv.\n\nEn skandale kan fjerne en direktør. Om AI-boblen brister, afgøres i sidste ende af virksomhedernes indtjening.",
+  "sources": [
+    {
+      "headline": "Nvidia meddeler Jensen Huangs fratræden, midlertidig CEO og regnskabsdato",
+      "urls": [
+        "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/default.aspx"
+      ],
+      "event_date": "2026-11-12",
+      "source_date": "2026-11-12",
+      "core_fact": "Nvidia meddelte 12. november Jensen Huangs fratræden, udpegede Colette Kress til midlertidig CEO og bekræftede regnskab 17. november.",
+      "evidence": {
+        "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-CEO-Transition/default.aspx",
+        "verified": true,
+        "checked_at": "2026-11-13T07:53:43+01:00",
+        "excerpt": "Jensen Huang has resigned as President, Chief Executive Officer, and a member of the Board, effective immediately.",
+        "supported_claims": [
+          "Nvidia bekræftede 12. november at Jensen Huang fratrådte som CEO og bestyrelsesmedlem.",
+          "Colette Kress er midlertidig CEO og har været CFO siden 2013.",
+          "Nvidia forventer kvartalsregnskab 17. november 2026."
+        ]
+      }
+    },
+    {
+      "headline": "Nasdaq Dorsey Wrights markedsoversigt for Nvidia 12. november",
+      "urls": [
+        "https://dorseywright.nasdaq.com/chart/performance/symbol/NVDA"
+      ],
+      "event_date": "2026-11-12",
+      "source_date": "2026-11-12",
+      "core_fact": "Nasdaq Dorsey Wright viste Nvidia til 166,19 dollar på sin kursoversigt, med perioden frem til 12. november 2026.",
+      "evidence": {
+        "url": "https://dorseywright.nasdaq.com/chart/performance/symbol/NVDA",
+        "verified": true,
+        "checked_at": "2026-11-13T07:53:43+01:00",
+        "excerpt": "NVDA 166.19 -10.89 50.93 40.47 54.11 -12.47",
+        "supported_claims": [
+          "Nasdaq Dorsey Wrights markedsoversigt viser NVDA til 166,19 USD for perioden til 12. november 2026."
+        ]
+      }
+    }
+  ],
+  "verification": {
+    "status": "passed",
+    "method": "independent_source_review",
+    "reviewed_text": "KAN JENSEN HUANGS AFGANG PUNKTERE AI-BOBLEN?\n\nNvidias medstifter Jensen Huang er trådt tilbage som topchef og bestyrelsesmedlem. Selskabet bekræftede nyheden torsdag den 12. november. Finansdirektør Colette Kress overtager midlertidigt, mens Nvidia søger en permanent afløser.\n\nDet er et ledelseschok i virksomheden, der er blevet symbolet på de enorme investeringer i kunstig intelligens. På Nasdaq Dorsey Wrights kursoversigt stod Nvidia-aktien i 166,19 dollar den 12. november.\n\nMen har Huangs privatliv virkelig punkteret AI-boblen?\n\nDet spørgsmål blander to forskellige risici sammen.\n\nDen første er risikoen ved at miste en usædvanligt vigtig grundlægger. Huang har ikke kun stået i spidsen for Nvidia. Han har været med til at forme investorernes fortælling om, hvorfor flere og flere datacentre, chips og AI-modeller er værd at finansiere. Når han forsvinder, stiger usikkerheden om strategien, kundeforholdene og kapitalanvendelsen.\n\nDen anden er risikoen ved selve AI-investeringerne. Uanset hvem der leder Nvidia, skal kunderne på et tidspunkt tjene nok på deres AI-systemer til at forsvare milliardinvesteringerne i regnekraft. Hvis deres forventede indtjening svækkes, kan efterspørgslen efter chips falde, og så kan aktiekurserne blive presset langt mere end af en enkelt persons afgang.\n\nDet interessante er derfor ikke at gætte på, hvor meget af kursudviklingen der skyldes skandalen. AI-investeringernes finansiering er i sig selv en kilde til usikkerhed. Huangs afgang kan fungere som katalysator, men det er ikke bevis for, at teknologien eller forretningsmodellen er brudt sammen.\n\nModargumentet er stærkt: Nvidia har stadig sin teknologi, sine medarbejdere og sine kunder. Kress har været finansdirektør siden 2013. Et lederskifte behøver ikke at ændre chipordrerne fra den ene dag til den anden.\n\nDen 17. november kommer Nvidias næste kvartalsregnskab. Det bliver en mere direkte prøve på AI-efterspørgslen end endnu en overskrift om Huangs privatliv.\n\nEn skandale kan fjerne en direktør. Om AI-boblen brister, afgøres i sidste ende af virksomhedernes indtjening.",
+    "unresolved_claims": []
+  },
+  "editorial": {
+    "status": "passed",
+    "story_key": "nvidia-jensen-huang-ceo-exit-ai-valuation",
+    "new_development": "Nvidia meddelte den 12. november, at medstifter Jensen Huang forlader CEO-posten, og at finansdirektør Colette Kress overtager midlertidigt.",
+    "mechanism": "En uventet CEO-fratræden kan øge usikkerheden om Nvidias teknologi, kundeforhold og investeringsstrategi, mens AI-kundernes økonomiske afkast fortsat bestemmer efterspørgslen.",
+    "reader_relevance": "Nvidias aktie og det bredere marked for AI- og halvlederaktier kan blive påvirket af øget ledelsesrisiko og ændrede forventninger til fremtidige indtægter.",
+    "image_relevance": "Det dokumentariske arkivfoto viser den fratrådte medstifter Jensen Huang på en teknologikonference i 2018 og gør historiens centrale aktør konkret uden at foregive at vise dagens begivenhed.",
+    "photo_file": "File:JensenHuangSC18.jpg"
+  },
+  "photo_subject": "Jensen Huang Nvidia conference",
+  "cover_title": "Jensen Huang forlader Nvidia",
+  "cover_subtitle": "Ledelsesrisiko eller revne i AI-boomet?"
+}
