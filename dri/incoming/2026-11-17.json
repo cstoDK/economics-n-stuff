@@ -2,43 +2,44 @@
   "date": "2026-11-17",
   "mode": "daily",
   "approved": true,
-  "facebook_text": "EU GÅR EFTER RUSLANDS BANKER OG OLIEHANDEL I NY SANKTIONSRUNDE\n\nEU's Ministerråd besluttede den 16. november at sanktionere yderligere 12 personer og 101 virksomheder og organisationer med forbindelser til Ruslands krigsøkonomi. Næsten 50 af de nye mål er russiske banker og finansielle institutioner. Andre har forbindelser til oliehandel og den såkaldte skyggeflåde.\n\nDet interessante for finansmarkederne er ikke blot antallet af sanktioner. Det er, hvilke transaktioner der nu bliver vanskeligere.\n\nFor de omfattede virksomheder indebærer EU's beslutning indefrysning af aktiver og forbud mod at stille penge eller økonomiske ressourcer til rådighed. En bank, der mister adgang til sine aktiver i EU, får vanskeligere ved at formidle betalinger gennem europæiske modparter. En oliehandler, der rammes af restriktionerne, må finde andre finansieringskanaler, forsikringsløsninger eller købere.\n\nDet kan påvirke den pris, som markedet vil betale for russisk olie, selv uden at den globale Brent-pris nødvendigvis ændrer sig. Hvis en handel kræver flere mellemled, større juridisk kontrol og højere transport- eller betalingsrisiko, vil køberen typisk kræve kompensation. Det kan øge rabatten på russisk olie i forhold til internationale referencepriser.\n\nMen her er en vigtig skelnen: EU har dokumenteret en konkret ændring af de juridiske og finansielle handelsvilkår. Det er ikke det samme som dokumentation for, at oliens prisrabat allerede er vokset. En sådan kurs- eller prisreaktion kan ikke udledes af sanktionslisten alene.\n\nRådet oplyser, at sanktionerne også omfatter virksomheder i blandt andet De Forenede Arabiske Emirater, Kina, Seychellerne og Oman med forbindelse til handel med russisk olie. Dermed forsøger EU at påvirke de internationale netværk, ikke kun selskaber registreret i Rusland.\n\nDen væsentligste modforklaring er, at handlen blot flytter til andre banker, skibe og jurisdiktioner. I så fald kan de faktiske omkostninger blive langt mindre end de formelle restriktioner antyder.\n\nMin vurdering er, at den finansielle virkning først bliver tydelig i betalinger, transportomkostninger og prisrabatter på russisk olie. Antallet af sanktioner er et politisk mål. Evnen til at håndhæve dem er det økonomisk afgørende.\n\nArkivfoto: EU's forsvarsministre ved et møde i Brest i januar 2022.",
+  "facebook_text": "HORMUZ ER LANGT FRA NORMALT, SELV OM OLIETRAFIKKEN VOKSER IGEN\n\nUSA's energimyndighed EIA offentliggjorde 16. november nye tal for olietransporten gennem verdens vigtigste maritime flaskehalse. De viser en delvis genopretning i Hormuzstrædet, men også hvor meget der stadig mangler efter krigens udbrud.\n\nI fjerde kvartal 2025 passerede 21,6 millioner tønder olie og olieprodukter dagligt gennem strædet. Under forstyrrelserne i andet kvartal 2026 faldt mængden til 5,1 millioner. I tredje kvartal steg den igen til 9,1 millioner tønder om dagen.\n\nDet er en fremgang på fire millioner tønder dagligt fra andet til tredje kvartal. Men trafikken nåede stadig kun omtrent 42 procent af niveauet før krigen.\n\nDet er en vigtig forskel for olieprisens risikopræmie. Når ruten igen kan bruges, falder sandsynligheden for, at eksportører må holde olie tilbage. Samtidig er sårbarheden stadig stor, hvis angreb eller nye restriktioner lukker dele af trafikken. Forsikring, længere sejlruter og behov for alternative transportveje kan derfor fortsat påvirke den effektive leveringspris.\n\nDe nye tal belyser ikke kun transporten. EIA anslår, at USA's strategiske olielagre faldt fra 413 millioner tønder i fjerde kvartal 2025 til 283 millioner i tredje kvartal 2026. Det er 130 millioner færre tønder i den statslige buffer, som kan anvendes ved alvorlige forsyningsforstyrrelser.\n\nDer er samtidig en vigtig modvægt til den bekymring. EIA's tal viser, at den samlede globale olieforsyning var omkring 105,1 millioner tønder dagligt i tredje kvartal, mod 103,5 millioner i fjerde kvartal 2025. Lavere trafik gennem Hormuz betyder altså ikke automatisk et tilsvarende fald i verdens samlede udbud.\n\nMin vurdering er, at det afgørende for Brent-markedet bliver, hvor stabilt de genoprettede olietransporter kan fortsætte, ikke alene hvor mange skibe der sejler gennem strædet på et givet tidspunkt. En varig normalisering kan dæmpe risikopræmien. Nye afbrydelser kan løfte den igen.\n\nTallene er kvartalsestimater, ikke en observation af dagens oliepris. EIA understreger selv, at skibes positionsdata i Hormuz er blevet usædvanligt upålidelige siden februar. Den usikkerhed skal regnes med, når markedets risiko vurderes.\n\nArkivfoto: Det amerikanske forsyningsskib USNS Leroy Grumman i Hormuzstrædet, december 2020.",
   "sources": [
     {
-      "headline": "Ukraine: EU lists 113 individuals and entities to further restrict Russia’s ability to finance its war of aggression",
+      "headline": "EIA Global Energy Security Data, released November 16, 2026",
       "urls": [
-        "https://www.consilium.europa.eu/en/press/press-releases/2026/11/16/ukraine-eu-lists-113-individuals-and-entities-to-further-restrict-russia-s-ability-to-finance-its-war-of-aggression/"
+        "https://www.eia.gov/outlooks/steo/report/energysecurity/article.php"
       ],
       "event_date": "2026-11-16",
       "source_date": "2026-11-16",
-      "core_fact": "Den 16. november omfattede nye EU-sanktioner 12 personer og 101 enheder, herunder næsten 50 russiske banker og aktører fra oliens skyggeflåde.",
+      "core_fact": "EIA's 16 november-udgivelse opgør trafik i Hormuz til 21,6 mio. tønder/dag Q4 2025, 5,1 Q2 2026 og 9,1 Q3 2026. USA's strategiske olielager 413 mod 283 mio. tønder.",
       "evidence": {
-        "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/11/16/ukraine-eu-lists-113-individuals-and-entities-to-further-restrict-russia-s-ability-to-finance-its-war-of-aggression/",
+        "url": "https://www.eia.gov/outlooks/steo/report/energysecurity/article.php",
         "verified": true,
-        "checked_at": "2026-11-17T13:52:00+01:00",
-        "excerpt": "Today’s listings include nearly 50 Russian banks and financial institutions.",
+        "checked_at": "2026-11-17T14:02:00+01:00",
+        "excerpt": "Since the end of February 2026, AIS signal data for ships transiting the Strait of Hormuz have become especially unreliable.",
         "supported_claims": [
-          "Næsten 50 banker og finansielle institutioner omfattes af EU's nye sanktioner.",
-          "EU's nye tilføjelser rammer finansielle aktører."
+          "EIA offentliggjorde 16. november 2026 data om Hormuz og strategiske lagre.",
+          "Trafikken i Hormuz opgjordes til 21,6, 5,1 og 9,1 mio. tønder om dagen i de angivne kvartaler.",
+          "USA's estimerede strategiske olielagre var 413 mod 283 mio. tønder.",
+          "AIS-data for Hormuz er usædvanligt upålidelige siden februar."
         ]
       }
     },
     {
-      "headline": "Foreign Affairs Council, 16 November 2026",
+      "headline": "EIA What's New: Global Energy Security Data",
       "urls": [
-        "https://www.consilium.europa.eu/en/meetings/fac/2026/11/16/"
+        "https://www.eia.gov/about/new/index.php"
       ],
       "event_date": "2026-11-16",
       "source_date": "2026-11-16",
-      "core_fact": "Udenrigsministermødet vedtog den 16. november restriktioner mod 12 personer og 101 enheder og drøftede yderligere tiltag mod skyggeflåden.",
+      "core_fact": "EIA bekræfter 16 november som udgivelsesdato for nye Global Energy Security Data med strategiske olielagre og transport gennem chokepoints.",
       "evidence": {
-        "url": "https://www.consilium.europa.eu/en/meetings/fac/2026/11/16/",
+        "url": "https://www.eia.gov/about/new/index.php",
         "verified": true,
-        "checked_at": "2026-11-17T13:52:00+01:00",
-        "excerpt": "the Council imposed additional restrictive measures on 12 individuals and 101 entities",
+        "checked_at": "2026-11-17T14:02:00+01:00",
+        "excerpt": "Today, EIA published the updated Global Energy Security Data series, including information on global strategic petroleum reserves and energy flows through key chokepoints.",
         "supported_claims": [
-          "Rådet besluttede nye sanktioner mod 12 personer og 101 enheder den 16. november.",
-          "Ministrene drøftede yderligere indsatser mod skyggeflåden."
+          "EIA frigav 16. november 2026 en opdateret dataserie om olielagre og flaskehalse."
         ]
       }
     }
@@ -46,18 +47,18 @@
   "verification": {
     "status": "passed",
     "method": "independent_source_review",
-    "reviewed_text": "EU GÅR EFTER RUSLANDS BANKER OG OLIEHANDEL I NY SANKTIONSRUNDE\n\nEU's Ministerråd besluttede den 16. november at sanktionere yderligere 12 personer og 101 virksomheder og organisationer med forbindelser til Ruslands krigsøkonomi. Næsten 50 af de nye mål er russiske banker og finansielle institutioner. Andre har forbindelser til oliehandel og den såkaldte skyggeflåde.\n\nDet interessante for finansmarkederne er ikke blot antallet af sanktioner. Det er, hvilke transaktioner der nu bliver vanskeligere.\n\nFor de omfattede virksomheder indebærer EU's beslutning indefrysning af aktiver og forbud mod at stille penge eller økonomiske ressourcer til rådighed. En bank, der mister adgang til sine aktiver i EU, får vanskeligere ved at formidle betalinger gennem europæiske modparter. En oliehandler, der rammes af restriktionerne, må finde andre finansieringskanaler, forsikringsløsninger eller købere.\n\nDet kan påvirke den pris, som markedet vil betale for russisk olie, selv uden at den globale Brent-pris nødvendigvis ændrer sig. Hvis en handel kræver flere mellemled, større juridisk kontrol og højere transport- eller betalingsrisiko, vil køberen typisk kræve kompensation. Det kan øge rabatten på russisk olie i forhold til internationale referencepriser.\n\nMen her er en vigtig skelnen: EU har dokumenteret en konkret ændring af de juridiske og finansielle handelsvilkår. Det er ikke det samme som dokumentation for, at oliens prisrabat allerede er vokset. En sådan kurs- eller prisreaktion kan ikke udledes af sanktionslisten alene.\n\nRådet oplyser, at sanktionerne også omfatter virksomheder i blandt andet De Forenede Arabiske Emirater, Kina, Seychellerne og Oman med forbindelse til handel med russisk olie. Dermed forsøger EU at påvirke de internationale netværk, ikke kun selskaber registreret i Rusland.\n\nDen væsentligste modforklaring er, at handlen blot flytter til andre banker, skibe og jurisdiktioner. I så fald kan de faktiske omkostninger blive langt mindre end de formelle restriktioner antyder.\n\nMin vurdering er, at den finansielle virkning først bliver tydelig i betalinger, transportomkostninger og prisrabatter på russisk olie. Antallet af sanktioner er et politisk mål. Evnen til at håndhæve dem er det økonomisk afgørende.\n\nArkivfoto: EU's forsvarsministre ved et møde i Brest i januar 2022.",
+    "reviewed_text": "HORMUZ ER LANGT FRA NORMALT, SELV OM OLIETRAFIKKEN VOKSER IGEN\n\nUSA's energimyndighed EIA offentliggjorde 16. november nye tal for olietransporten gennem verdens vigtigste maritime flaskehalse. De viser en delvis genopretning i Hormuzstrædet, men også hvor meget der stadig mangler efter krigens udbrud.\n\nI fjerde kvartal 2025 passerede 21,6 millioner tønder olie og olieprodukter dagligt gennem strædet. Under forstyrrelserne i andet kvartal 2026 faldt mængden til 5,1 millioner. I tredje kvartal steg den igen til 9,1 millioner tønder om dagen.\n\nDet er en fremgang på fire millioner tønder dagligt fra andet til tredje kvartal. Men trafikken nåede stadig kun omtrent 42 procent af niveauet før krigen.\n\nDet er en vigtig forskel for olieprisens risikopræmie. Når ruten igen kan bruges, falder sandsynligheden for, at eksportører må holde olie tilbage. Samtidig er sårbarheden stadig stor, hvis angreb eller nye restriktioner lukker dele af trafikken. Forsikring, længere sejlruter og behov for alternative transportveje kan derfor fortsat påvirke den effektive leveringspris.\n\nDe nye tal belyser ikke kun transporten. EIA anslår, at USA's strategiske olielagre faldt fra 413 millioner tønder i fjerde kvartal 2025 til 283 millioner i tredje kvartal 2026. Det er 130 millioner færre tønder i den statslige buffer, som kan anvendes ved alvorlige forsyningsforstyrrelser.\n\nDer er samtidig en vigtig modvægt til den bekymring. EIA's tal viser, at den samlede globale olieforsyning var omkring 105,1 millioner tønder dagligt i tredje kvartal, mod 103,5 millioner i fjerde kvartal 2025. Lavere trafik gennem Hormuz betyder altså ikke automatisk et tilsvarende fald i verdens samlede udbud.\n\nMin vurdering er, at det afgørende for Brent-markedet bliver, hvor stabilt de genoprettede olietransporter kan fortsætte, ikke alene hvor mange skibe der sejler gennem strædet på et givet tidspunkt. En varig normalisering kan dæmpe risikopræmien. Nye afbrydelser kan løfte den igen.\n\nTallene er kvartalsestimater, ikke en observation af dagens oliepris. EIA understreger selv, at skibes positionsdata i Hormuz er blevet usædvanligt upålidelige siden februar. Den usikkerhed skal regnes med, når markedets risiko vurderes.\n\nArkivfoto: Det amerikanske forsyningsskib USNS Leroy Grumman i Hormuzstrædet, december 2020.",
     "unresolved_claims": []
   },
   "editorial": {
     "status": "passed",
-    "story_key": "eu-russia-bank-oil-sanctions-november-2026",
-    "new_development": "EU's Ministerråd besluttede den 16. november sanktioner mod 12 personer og 101 enheder, herunder næsten 50 russiske finansielle institutioner og olieaktører.",
-    "mechanism": "Indefrysning af aktiver og betalingsforbud kan begrænse transaktioner for russiske banker og oliehandlere, øge handelens friktion og potentielt påvirke den russiske olierabat.",
-    "reader_relevance": "For markedet for russisk eksportolie er effekten af sanktionslisten en ændring i muligheden for betaling, finansiering og transport, ikke en dokumenteret prisbevægelse.",
-    "image_relevance": "Et CC0-dokumentarfoto fra et EU-forsvarsministermøde i 2022 viser ministerrådets politiske ramme; teksten markerer tydeligt, at motivet er et arkivfoto fra 2022.",
-    "photo_file": "File:Présidence Française du Conseil de l'Union Européenne 2022. The French Presidency of the council of the European Union 2022. - 51828333834.jpg"
+    "story_key": "eia-hormuz-oil-flows-reserves-november-2026",
+    "new_development": "EIA udgav 16. november nye kvartalsdata, som dokumenterer at Hormuz-trafikken i tredje kvartal 2026 stadig var under halvdelen af niveauet før krigen.",
+    "mechanism": "Genoprettede olietransporter kan reducere risiko for fysisk mangel, men skrøbelige ruter og lavere strategiske lagre kan fastholde en forsyningsrisikopræmie.",
+    "reader_relevance": "De konkrete mængder på 9,1 mod 21,6 millioner tønder dagligt ændrer vurderingen af leveringsrisikoen på Brent-markedet; ingen dagskursbevægelse påstås dokumenteret.",
+    "image_relevance": "Det dokumentariske arkivfoto viser et navngivet amerikansk olieforsyningsskib, USNS Leroy Grumman, under passage af netop Hormuzstrædet i 2020, og årstallet fremgår tydeligt af opslaget.",
+    "photo_file": "File:USNS Leroy Grumman (T-AO 195) transits the Strait of Hormuz 6470743.jpg"
   },
-  "cover_title": "EU RAMMER RUSSISKE BANKER OG OLIEHANDEL",
-  "cover_subtitle": "113 nye sanktioner ændrer de finansielle handelsvilkår"
+  "cover_title": "HORMUZ: OLIETRAFIKKEN ER STADIG UNDER HALVDELEN",
+  "cover_subtitle": "Nye EIA-tal afslører sårbare leverancer og lavere nødlagre"
 }
