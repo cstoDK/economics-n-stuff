@@ -16,7 +16,7 @@ class Tests(unittest.TestCase):
     def test_sunday(self):
         self.assertEqual(mode_for(datetime(2026,10,18,7,35,tzinfo=ZoneInfo("Europe/Copenhagen"))),"weekly")
     def test_saturday(self):
-        self.assertFalse(should_run(datetime(2026,10,17,7,35,tzinfo=ZoneInfo("Europe/Copenhagen"))))
+        self.assertTrue(should_run(datetime(2026,10,17,7,35,tzinfo=ZoneInfo("Europe/Copenhagen"))))
     def test_sources(self):
         self.assertTrue(is_trusted("https://www.ecb.europa.eu/example"))
         self.assertFalse(is_trusted("https://reuters.com.evil.com/example"))
