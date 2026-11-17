@@ -60,7 +60,6 @@ def editorial_digest(data):
 
 def check_history(data, photo, state, incoming):
     today = date.fromisoformat(data["date"])
-    recent_count = 0
     for path in state.glob("*.publication.json"):
         previous_day = path.name.split(".", 1)[0]
         age = (today - date.fromisoformat(previous_day)).days
@@ -69,7 +68,6 @@ def check_history(data, photo, state, incoming):
         publication = json.loads(path.read_text(encoding="utf-8"))
         if publication.get("status") not in {"sent", "reserved", "scheduled", "sending"}:
             continue
-        recent_count += age <= 6
         previous = json.loads((incoming / f"{previous_day}.json").read_text(encoding="utf-8"))
         old_review = previous.get("editorial") or {}
         old_headline = previous["facebook_text"].strip().splitlines()[0]
@@ -81,5 +79,3 @@ def check_history(data, photo, state, incoming):
         old_photo = json.loads(receipt.read_text(encoding="utf-8")).get("photo") if receipt.exists() else None
         if old_photo and (photo["sha1"] == old_photo.get("sha1") or photo["title"] == old_photo.get("title")):
             raise RuntimeError(f"Cover photo already used on {previous_day}")
-    if recent_count >= 3:
-        raise RuntimeError("Three editions already sent or in progress in this seven-day window")
