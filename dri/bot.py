@@ -50,7 +50,7 @@ def should_run(instant: datetime, force: bool = False):
     local = instant.astimezone(TZ)
     if force:
         return True
-    return local.weekday() in (0, 1, 2, 3, 4, 6) and local.hour == 7
+    return local.hour == 7
 
 
 def mode_for(instant: datetime):
