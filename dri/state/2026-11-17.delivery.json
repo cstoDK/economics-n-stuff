@@ -1,5 +1,5 @@
 {
-  "status": "reserved",
+  "status": "delivered",
   "run_id": "44088210007",
   "date": "2026-11-17",
   "text_sha256": "3803464cbf87e43a3a4180b4a40f41feea14f8523af32772522af6dca0c65028",
@@ -8,5 +8,7 @@
   "photo": {
     "title": "File:USNS Leroy Grumman (T-AO 195) transits the Strait of Hormuz 6470743.jpg",
     "sha1": "76596b6530baf26bc461f26f221b9ff269f9000b"
-  }
+  },
+  "buffer_id": "6afc4faa223fb0bae76ff544",
+  "image_url": "https://raw.githubusercontent.com/cstoDK/economics-n-stuff/e4bd6ea78657256b1b858147ebc8be0ba36c3f83/dri/assets/2026-11-17.jpg"
 }
