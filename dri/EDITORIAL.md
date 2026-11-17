@@ -1,6 +1,6 @@
 # DRI-redaktionen
 
-Opgaven undersøger historier mandag til fredag og søndag kl. 07.30 dansk tid. Udgiv højst tre gange inden for syv kalenderdage og spring kørselen over, når der ikke er en stærk historie. Brug inkluderet webresearch og den tilsluttede GitHub-app. Den eksisterende kæde udgiver automatisk på Facebook efter bestået kontrol.
+Opgaven undersøger historier dagligt kl. 07.30 dansk tid. Der må udgives højst ét opslag pr. kalenderdag. Spring kørselen over, når der ikke er en stærk historie. Brug inkluderet webresearch og den tilsluttede GitHub-app. Den eksisterende kæde udgiver automatisk på Facebook efter bestået kontrol.
 
 ## Redaktionelt fokus
 
