@@ -2,41 +2,43 @@
   "date": "2026-11-17",
   "mode": "daily",
   "approved": true,
-  "facebook_text": "OLIEPRISEN FALDER, MENS ANGREBENE I HORMUZ FORTSÆTTER\n\nBrent-olien faldt tirsdag morgen til 91,80 dollar pr. tønde, et yderligere fald på 0,7 procent. Det skete efter et kraftigt fald mandag og trods nye meldinger om angreb på tankskibe i Hormuzstrædet.\n\nDet centrale spørgsmål er, hvorfor markedet reagerer med lavere priser, når den militære risiko fortsat er betydelig.\n\nForklaringen kan ligge i en ændret forventning til den fysiske olieforsyning. Det Internationale Energiagentur, IEA, vurderer, at verdens oliemarked igen vil få et udbudsoverskud i fjerde kvartal. Eksporten fra Mellemøsten er begyndt at komme tilbage hurtigere end den globale efterspørgsel.\n\nNår flere tønder faktisk når frem til køberne, bliver risikoen for akut mangel mindre. Dermed kan også den risikopræmie, der knytter sig til krigen mellem USA og Iran, falde. Prisfaldet er en observeret markedsbevægelse. At ændrede forsyningsforventninger er den vigtigste årsag, er en analytisk fortolkning, som stemmer med IEA's vurdering af udbud og efterspørgsel.\n\nMen situationen er ikke normaliseret. Den seneste IEA-vurdering peger på et kommende udbudsoverskud, men angreb på skibsfarten kan stadig forstyrre transporten. Det gør forventningen til fremtidige leverancer usikker.\n\nMandag oplyste Iran, at miner havde beskadiget flere tankskibe. En britisk maritim overvågningsorganisation rapporterede samtidig, at et projektil havde antændt et tankskibs maskinrum. Et tredje amerikansk hangarskib ankom også til regionen.\n\nMin tese er derfor, at markedet for øjeblikket lægger større vægt på genoprettede leverancer end på risikoen for nye afbrydelser. Det er ikke det samme som, at risikoen er væk.\n\nDet afgørende bliver, om de faktiske olieleverancer fortsætter med at stige. Hvis skibstrafikken igen bremses, kan risikopræmien hurtigt vende tilbage. Hvis leverancerne holder, bliver det vanskeligere at begrunde høje oliepriser alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet i 2020.",
+  "facebook_text": "EU GÅR EFTER RUSLANDS BANKER OG OLIEHANDEL I NY SANKTIONSRUNDE\n\nEU's Ministerråd besluttede den 16. november at sanktionere yderligere 12 personer og 101 virksomheder og organisationer med forbindelser til Ruslands krigsøkonomi. Næsten 50 af de nye mål er russiske banker og finansielle institutioner. Andre har forbindelser til oliehandel og den såkaldte skyggeflåde.\n\nDet interessante for finansmarkederne er ikke blot antallet af sanktioner. Det er, hvilke transaktioner der nu bliver vanskeligere.\n\nFor de omfattede virksomheder indebærer EU's beslutning indefrysning af aktiver og forbud mod at stille penge eller økonomiske ressourcer til rådighed. En bank, der mister adgang til sine aktiver i EU, får vanskeligere ved at formidle betalinger gennem europæiske modparter. En oliehandler, der rammes af restriktionerne, må finde andre finansieringskanaler, forsikringsløsninger eller købere.\n\nDet kan påvirke den pris, som markedet vil betale for russisk olie, selv uden at den globale Brent-pris nødvendigvis ændrer sig. Hvis en handel kræver flere mellemled, større juridisk kontrol og højere transport- eller betalingsrisiko, vil køberen typisk kræve kompensation. Det kan øge rabatten på russisk olie i forhold til internationale referencepriser.\n\nMen her er en vigtig skelnen: EU har dokumenteret en konkret ændring af de juridiske og finansielle handelsvilkår. Det er ikke det samme som dokumentation for, at oliens prisrabat allerede er vokset. En sådan kurs- eller prisreaktion kan ikke udledes af sanktionslisten alene.\n\nRådet oplyser, at sanktionerne også omfatter virksomheder i blandt andet De Forenede Arabiske Emirater, Kina, Seychellerne og Oman med forbindelse til handel med russisk olie. Dermed forsøger EU at påvirke de internationale netværk, ikke kun selskaber registreret i Rusland.\n\nDen væsentligste modforklaring er, at handlen blot flytter til andre banker, skibe og jurisdiktioner. I så fald kan de faktiske omkostninger blive langt mindre end de formelle restriktioner antyder.\n\nMin vurdering er, at den finansielle virkning først bliver tydelig i betalinger, transportomkostninger og prisrabatter på russisk olie. Antallet af sanktioner er et politisk mål. Evnen til at håndhæve dem er det økonomisk afgørende.\n\nArkivfoto: EU's forsvarsministre ved et møde i Brest i januar 2022.",
   "sources": [
     {
-      "headline": "World markets mostly drop as AI stocks remain under pressure",
+      "headline": "Ukraine: EU lists 113 individuals and entities to further restrict Russia’s ability to finance its war of aggression",
       "urls": [
-        "https://apnews.com/article/stock-markets-ai-earnings-oil-4d5a35288288389d894e63e6bebe8240"
+        "https://www.consilium.europa.eu/en/press/press-releases/2026/11/16/ukraine-eu-lists-113-individuals-and-entities-to-further-restrict-russia-s-ability-to-finance-its-war-of-aggression/"
       ],
-      "event_date": "2026-11-17",
-      "source_date": "2026-11-17",
-      "core_fact": "Brent faldt 0,7 procent til 91,80 dollar tirsdag.",
+      "event_date": "2026-11-16",
+      "source_date": "2026-11-16",
+      "core_fact": "Den 16. november omfattede nye EU-sanktioner 12 personer og 101 enheder, herunder næsten 50 russiske banker og aktører fra oliens skyggeflåde.",
       "evidence": {
-        "url": "https://apnews.com/article/stock-markets-ai-earnings-oil-4d5a35288288389d894e63e6bebe8240",
+        "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/11/16/ukraine-eu-lists-113-individuals-and-entities-to-further-restrict-russia-s-ability-to-finance-its-war-of-aggression/",
         "verified": true,
-        "checked_at": "2026-11-17T10:24:00+01:00",
-        "excerpt": "the price of Brent crude, the international standard, edged 0.7% lower to $91.80 a barrel",
+        "checked_at": "2026-11-17T13:52:00+01:00",
+        "excerpt": "Today’s listings include nearly 50 Russian banks and financial institutions.",
         "supported_claims": [
-          "Brent faldt 0,7 procent til 91,80 dollar tirsdag."
+          "Næsten 50 banker og finansielle institutioner omfattes af EU's nye sanktioner.",
+          "EU's nye tilføjelser rammer finansielle aktører."
         ]
       }
     },
     {
-      "headline": "Third American aircraft carrier arrives in the Middle East, and other Mideast news",
+      "headline": "Foreign Affairs Council, 16 November 2026",
       "urls": [
-        "https://apnews.com/article/mideast-news-israel-gaza-iran-houthis-november-16-2026-8830a880160d69e2d7f1fd654207a121"
+        "https://www.consilium.europa.eu/en/meetings/fac/2026/11/16/"
       ],
       "event_date": "2026-11-16",
       "source_date": "2026-11-16",
-      "core_fact": "Et tredje hangarskib ankom, Iran meldte om miner, og britisk overvågning rapporterede projektilangreb.",
+      "core_fact": "Udenrigsministermødet vedtog den 16. november restriktioner mod 12 personer og 101 enheder og drøftede yderligere tiltag mod skyggeflåden.",
       "evidence": {
-        "url": "https://apnews.com/article/mideast-news-israel-gaza-iran-houthis-november-16-2026-8830a880160d69e2d7f1fd654207a121",
+        "url": "https://www.consilium.europa.eu/en/meetings/fac/2026/11/16/",
         "verified": true,
-        "checked_at": "2026-11-17T10:24:00+01:00",
-        "excerpt": "Another U.S. aircraft carrier has arrived in the Middle East, a U.S. official said Monday",
+        "checked_at": "2026-11-17T13:52:00+01:00",
+        "excerpt": "the Council imposed additional restrictive measures on 12 individuals and 101 entities",
         "supported_claims": [
-          "Et tredje amerikansk hangarskib ankom til regionen."
+          "Rådet besluttede nye sanktioner mod 12 personer og 101 enheder den 16. november.",
+          "Ministrene drøftede yderligere indsatser mod skyggeflåden."
         ]
       }
     }
@@ -44,18 +46,18 @@
   "verification": {
     "status": "passed",
     "method": "independent_source_review",
-    "reviewed_text": "OLIEPRISEN FALDER, MENS ANGREBENE I HORMUZ FORTSÆTTER\n\nBrent-olien faldt tirsdag morgen til 91,80 dollar pr. tønde, et yderligere fald på 0,7 procent. Det skete efter et kraftigt fald mandag og trods nye meldinger om angreb på tankskibe i Hormuzstrædet.\n\nDet centrale spørgsmål er, hvorfor markedet reagerer med lavere priser, når den militære risiko fortsat er betydelig.\n\nForklaringen kan ligge i en ændret forventning til den fysiske olieforsyning. Det Internationale Energiagentur, IEA, vurderer, at verdens oliemarked igen vil få et udbudsoverskud i fjerde kvartal. Eksporten fra Mellemøsten er begyndt at komme tilbage hurtigere end den globale efterspørgsel.\n\nNår flere tønder faktisk når frem til køberne, bliver risikoen for akut mangel mindre. Dermed kan også den risikopræmie, der knytter sig til krigen mellem USA og Iran, falde. Prisfaldet er en observeret markedsbevægelse. At ændrede forsyningsforventninger er den vigtigste årsag, er en analytisk fortolkning, som stemmer med IEA's vurdering af udbud og efterspørgsel.\n\nMen situationen er ikke normaliseret. Den seneste IEA-vurdering peger på et kommende udbudsoverskud, men angreb på skibsfarten kan stadig forstyrre transporten. Det gør forventningen til fremtidige leverancer usikker.\n\nMandag oplyste Iran, at miner havde beskadiget flere tankskibe. En britisk maritim overvågningsorganisation rapporterede samtidig, at et projektil havde antændt et tankskibs maskinrum. Et tredje amerikansk hangarskib ankom også til regionen.\n\nMin tese er derfor, at markedet for øjeblikket lægger større vægt på genoprettede leverancer end på risikoen for nye afbrydelser. Det er ikke det samme som, at risikoen er væk.\n\nDet afgørende bliver, om de faktiske olieleverancer fortsætter med at stige. Hvis skibstrafikken igen bremses, kan risikopræmien hurtigt vende tilbage. Hvis leverancerne holder, bliver det vanskeligere at begrunde høje oliepriser alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet i 2020.",
+    "reviewed_text": "EU GÅR EFTER RUSLANDS BANKER OG OLIEHANDEL I NY SANKTIONSRUNDE\n\nEU's Ministerråd besluttede den 16. november at sanktionere yderligere 12 personer og 101 virksomheder og organisationer med forbindelser til Ruslands krigsøkonomi. Næsten 50 af de nye mål er russiske banker og finansielle institutioner. Andre har forbindelser til oliehandel og den såkaldte skyggeflåde.\n\nDet interessante for finansmarkederne er ikke blot antallet af sanktioner. Det er, hvilke transaktioner der nu bliver vanskeligere.\n\nFor de omfattede virksomheder indebærer EU's beslutning indefrysning af aktiver og forbud mod at stille penge eller økonomiske ressourcer til rådighed. En bank, der mister adgang til sine aktiver i EU, får vanskeligere ved at formidle betalinger gennem europæiske modparter. En oliehandler, der rammes af restriktionerne, må finde andre finansieringskanaler, forsikringsløsninger eller købere.\n\nDet kan påvirke den pris, som markedet vil betale for russisk olie, selv uden at den globale Brent-pris nødvendigvis ændrer sig. Hvis en handel kræver flere mellemled, større juridisk kontrol og højere transport- eller betalingsrisiko, vil køberen typisk kræve kompensation. Det kan øge rabatten på russisk olie i forhold til internationale referencepriser.\n\nMen her er en vigtig skelnen: EU har dokumenteret en konkret ændring af de juridiske og finansielle handelsvilkår. Det er ikke det samme som dokumentation for, at oliens prisrabat allerede er vokset. En sådan kurs- eller prisreaktion kan ikke udledes af sanktionslisten alene.\n\nRådet oplyser, at sanktionerne også omfatter virksomheder i blandt andet De Forenede Arabiske Emirater, Kina, Seychellerne og Oman med forbindelse til handel med russisk olie. Dermed forsøger EU at påvirke de internationale netværk, ikke kun selskaber registreret i Rusland.\n\nDen væsentligste modforklaring er, at handlen blot flytter til andre banker, skibe og jurisdiktioner. I så fald kan de faktiske omkostninger blive langt mindre end de formelle restriktioner antyder.\n\nMin vurdering er, at den finansielle virkning først bliver tydelig i betalinger, transportomkostninger og prisrabatter på russisk olie. Antallet af sanktioner er et politisk mål. Evnen til at håndhæve dem er det økonomisk afgørende.\n\nArkivfoto: EU's forsvarsministre ved et møde i Brest i januar 2022.",
     "unresolved_claims": []
   },
   "editorial": {
     "status": "passed",
-    "story_key": "hormuz-oil-surplus-november-2026",
-    "new_development": "Brent faldt til 91,80 dollar tirsdag, selv om nye tankskibsangreb og amerikansk militær tilstedeværelse understreger fortsat risiko.",
-    "mechanism": "IEA's udsigt til et udbudsoverskud og genoprettede eksportstrømme kan reducere den risikopræmie, som krigen har lagt på Brent.",
-    "reader_relevance": "Brent faldt 0,7 procent til 91,80 dollar tirsdag, mens udbudsforventningerne forbedres trods fortsat krigsrisiko.",
-    "image_relevance": "Et arkivfoto fra 2020 viser det konkrete amerikanske olieforsyningsskib USNS Leroy Grumman under passage af Hormuzstrædet og illustrerer den sårbare maritime rute.",
-    "photo_file": "File:USNS Leroy Grumman (T-AO 195) transits the Strait of Hormuz 6470743.jpg"
+    "story_key": "eu-russia-bank-oil-sanctions-november-2026",
+    "new_development": "EU's Ministerråd besluttede den 16. november sanktioner mod 12 personer og 101 enheder, herunder næsten 50 russiske finansielle institutioner og olieaktører.",
+    "mechanism": "Indefrysning af aktiver og betalingsforbud kan begrænse transaktioner for russiske banker og oliehandlere, øge handelens friktion og potentielt påvirke den russiske olierabat.",
+    "reader_relevance": "For markedet for russisk eksportolie er effekten af sanktionslisten en ændring i muligheden for betaling, finansiering og transport, ikke en dokumenteret prisbevægelse.",
+    "image_relevance": "Et CC0-dokumentarfoto fra et EU-forsvarsministermøde i 2022 viser ministerrådets politiske ramme; teksten markerer tydeligt, at motivet er et arkivfoto fra 2022.",
+    "photo_file": "File:Présidence Française du Conseil de l'Union Européenne 2022. The French Presidency of the council of the European Union 2022. - 51828333834.jpg"
   },
-  "cover_title": "Brent falder trods angreb i Hormuz",
-  "cover_subtitle": "IEA venter olieoverskud, mens sikkerhedsrisikoen består"
+  "cover_title": "EU RAMMER RUSSISKE BANKER OG OLIEHANDEL",
+  "cover_subtitle": "113 nye sanktioner ændrer de finansielle handelsvilkår"
 }
