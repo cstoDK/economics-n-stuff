@@ -60,14 +60,13 @@ class EditorialTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "photo already used"):
                 check_history(self.data, photo, state, incoming)
 
-    def test_fourth_edition_in_seven_days_is_rejected(self):
+    def test_fourth_edition_in_seven_days_is_allowed_when_distinct(self):
         with tempfile.TemporaryDirectory() as folder:
             state = incoming = Path(folder)
             for day in ("2026-11-02", "2026-11-04", "2026-11-06"):
                 (state / f"{day}.publication.json").write_text('{"status":"sent"}')
                 (incoming / f"{day}.json").write_text('{"facebook_text":"Anden historie"}')
-            with self.assertRaisesRegex(RuntimeError, "Three editions"):
-                check_history(self.data, {"title": "File:New photo.jpg", "sha1": "new"}, state, incoming)
+            check_history(self.data, {"title": "File:New photo.jpg", "sha1": "new"}, state, incoming)
 
     def test_exact_photo_lookup_never_searches_for_generic_images(self):
         with patch.object(bot, "api_request", return_value={"query": {"pages": []}}) as lookup:
