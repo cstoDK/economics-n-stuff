@@ -33,8 +33,8 @@ def validate_file(filename: str):
     instant = datetime.strptime(date_string, "%Y-%m-%d").replace(hour=7,minute=30,tzinfo=TZ)
     if now_local().date() != instant.date():
         raise RuntimeError("Outdated or future-dated post, refusing to create draft")
-    if mode_for(instant) != data.get("mode") or instant.weekday() == 5:
-        raise RuntimeError("Mode does not match date / no Saturday edition")
+    if mode_for(instant) != data.get("mode"):
+        raise RuntimeError("Mode does not match date")
     if data.get("approved") is not True:
         raise RuntimeError("Editorial fact-check not approved, refusing draft")
     body = validate_result(data, instant, single_story=True)
