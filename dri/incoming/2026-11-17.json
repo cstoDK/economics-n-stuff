@@ -2,56 +2,25 @@
   "date": "2026-11-17",
   "mode": "daily",
   "approved": true,
-  "facebook_text": "OLIEN FALDER, SELV OM TANKSKIBE RAMMES I HORMUZSTRÆDET\n\nMandag faldt Brent-olien 3,6 procent til 92,44 dollar pr. tønde. Tirsdag morgen fortsatte faldet til 91,66 dollar. Det skete, samtidig med at nye meldinger om beskadigede tankskibe understregede, at krigen mellem USA og Iran fortsat truer en af verdens vigtigste energiruter.\n\nForklaringen ligger i en ændring af markedets forventninger til den faktiske olieforsyning.\n\nDet Internationale Energiagentur, IEA, vurderer nu, at verdens olieudbud i fjerde kvartal vil overstige efterspørgslen med omkring 1,7 millioner tønder dagligt. Det er et markant skift fra forventningen om underskud. Eksporten fra Mellemøsten er kommet hurtigere tilbage, end efterspørgslen er steget.\n\nNår flere tønder når frem til køberne, mindskes frygten for akut mangel. Det kan sænke den risikopræmie, som handlere ellers kræver for at holde olieeksponering under en krig. Mandagens prisfald er observeret. At netop forventningen om overskud er hovedårsagen, er en fortolkning understøttet af markedskommentarer, ikke noget kursbevægelsen alene beviser.\n\nSikkerhedsrisikoen er langt fra forsvundet. Iran oplyser, at flere tankskibe er blevet ramt af miner. En britisk maritim myndighed har desuden rapporteret om brand efter et projektilangreb. Oplysningerne om de iranske mineangreb er ikke uafhængigt bekræftet.\n\nSamtidig ankom et tredje amerikansk hangarskib til Mellemøsten. Det viser, hvor skrøbelig genopretningen er. En ny afbrydelse af eksporten kan hurtigt ændre regnestykket igen.\n\nMin tese er derfor ikke, at krigen er blevet irrelevant for olieprisen. Den er, at markedet i øjeblikket vægter de tønder, der faktisk leveres, højere end risikoen for de tønder, der potentielt kan gå tabt.\n\nDet afgørende datapunkt bliver, om de genoprettede leverancer holder, og om lagrene fortsætter med at vokse. Hvis skibstrafikken igen bremses, kan risikopræmien vende tilbage. Hvis leverancerne holder, bliver et vedvarende højt prisniveau vanskeligere at begrunde alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet, 2020.",
+  "facebook_text": "OLIEPRISEN FALDER, MENS ANGREBENE I HORMUZ FORTSÆTTER\n\nBrent-olien faldt tirsdag morgen til 91,62 dollar pr. tønde, et yderligere fald på 0,9 procent. Det skete efter et kraftigt fald mandag og trods nye meldinger om angreb på tankskibe i Hormuzstrædet.\n\nDet centrale spørgsmål er, hvorfor markedet reagerer med lavere priser, når den militære risiko fortsat er betydelig.\n\nForklaringen kan ligge i en ændret forventning til den fysiske olieforsyning. Det Internationale Energiagentur, IEA, vurderer, at verdens oliemarked igen vil få et udbudsoverskud i fjerde kvartal. Eksporten fra Mellemøsten er begyndt at komme tilbage hurtigere end den globale efterspørgsel.\n\nNår flere tønder faktisk når frem til køberne, bliver risikoen for akut mangel mindre. Dermed kan også den risikopræmie, der knytter sig til krigen mellem USA og Iran, falde. Prisfaldet er en observeret markedsbevægelse. At ændrede forsyningsforventninger er den vigtigste årsag, er en analytisk fortolkning, som stemmer med Reuters' gengivelse af markedets vurdering.\n\nMen situationen er ikke normaliseret. Ifølge analytikere citeret af Reuters er olietransporten gennem Hormuzstrædet stadig kun 49 procent af niveauet før krigen. Alternative eksportveje er desuden sårbare over for angreb og logistiske begrænsninger.\n\nMandag oplyste Iran, at miner havde beskadiget flere tankskibe. En britisk maritim overvågningsorganisation rapporterede samtidig, at et projektil havde antændt et tankskibs maskinrum. Et tredje amerikansk hangarskib ankom også til regionen.\n\nMin tese er derfor, at markedet for øjeblikket lægger større vægt på genoprettede leverancer end på risikoen for nye afbrydelser. Det er ikke det samme som, at risikoen er væk.\n\nDet afgørende bliver, om de faktiske olieleverancer fortsætter med at stige. Hvis skibstrafikken igen bremses, kan risikopræmien hurtigt vende tilbage. Hvis leverancerne holder, bliver det vanskeligere at begrunde høje oliepriser alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet i 2020.",
   "sources": [
     {
-      "headline": "Oil settles lower as recovering Middle East exports bolster surplus outlook",
-      "urls": [
-        "https://www.reuters.com/business/energy/oil-prices-fall-expectations-coming-supply-surplus-2026-11-16/"
-      ],
-      "event_date": "2026-11-16",
-      "source_date": "2026-11-16",
-      "core_fact": "Brent faldt 3,6 procent til 92,44 dollar og IEA ventes at se overskud på 1,7 mio. tønder dagligt i fjerde kvartal.",
-      "evidence": [
-        {
-          "url": "https://www.reuters.com/business/energy/oil-prices-fall-expectations-coming-supply-surplus-2026-11-16/",
-          "verified": true,
-          "checked_at": "2026-11-17T07:00:00+01:00",
-          "excerpt": "Brent crude futures closed down $3.40, or 3.6%, at $92.44 a barrel",
-          "supported_claims": [
-            "Brent faldt 3,6 procent til 92,44 dollar mandag."
-          ]
-        },
-        {
-          "url": "https://www.reuters.com/business/energy/oil-prices-fall-expectations-coming-supply-surplus-2026-11-16/",
-          "verified": true,
-          "checked_at": "2026-11-17T07:00:00+01:00",
-          "excerpt": "Oil supply will average 105 million barrels per day (bpd) in the fourth quarter, 1.7 million bpd higher than forecast demand",
-          "supported_claims": [
-            "IEA's fjerdekvartalsprognose viser overskud på 1,7 millioner tønder dagligt."
-          ]
-        }
-      ]
-    },
-    {
-      "headline": "Oil slips as recovering Mideast exports blunt Gulf tensions",
+      "headline": "Oil slips as recovering Middle East exports blunt Gulf tensions",
       "urls": [
         "https://www.reuters.com/business/energy/oil-slips-supply-surplus-outlook-despite-gulf-tensions-2026-11-17/"
       ],
       "event_date": "2026-11-17",
       "source_date": "2026-11-17",
-      "core_fact": "Brent faldt tirsdag morgen til 91,66 dollar; genoprettede eksportstrømme presser prisen.",
-      "evidence": [
-        {
-          "url": "https://www.reuters.com/business/energy/oil-slips-supply-surplus-outlook-despite-gulf-tensions-2026-11-17/",
-          "verified": true,
-          "checked_at": "2026-11-17T07:00:00+01:00",
-          "excerpt": "Brent crude futures ‌dropped 78 cents, or 0.8%, to $91.66 a barrel by 0430 GMT",
-          "supported_claims": [
-            "Brent faldt tirsdag morgen til 91,66 dollar."
-          ]
-        }
-      ]
+      "core_fact": "Brent 91,62 dollar; IEA forventer overskud; Hormuz gennemstrømning 49 procent af førkrigsniveau.",
+      "evidence": {
+        "url": "https://www.reuters.com/business/energy/oil-slips-supply-surplus-outlook-despite-gulf-tensions-2026-11-17/",
+        "verified": true,
+        "checked_at": "2026-11-17T10:24:00+01:00",
+        "excerpt": "Brent crude futures were down 82 cents, or 0.9%, to $91.62 a barrel at 0720 GMT",
+        "supported_claims": [
+          "Brent 91,62 dollar tirsdag morgen, fald 0,9 procent."
+        ]
+      }
     },
     {
       "headline": "Third American aircraft carrier arrives in the Middle East, and other Mideast news",
@@ -60,41 +29,30 @@
       ],
       "event_date": "2026-11-16",
       "source_date": "2026-11-16",
-      "core_fact": "Et tredje amerikansk hangarskib ankom; Iran rapporterede mineramte tankskibe og UKMTO rapporterede projektilbrand.",
-      "evidence": [
-        {
-          "url": "https://apnews.com/article/mideast-news-israel-gaza-iran-houthis-november-16-2026-8830a880160d69e2d7f1fd654207a121",
-          "verified": true,
-          "checked_at": "2026-11-17T07:00:00+01:00",
-          "excerpt": "The arrival of the USS Theodore Roosevelt restores the total number of U.S. aircraft carriers in the Middle East to three",
-          "supported_claims": [
-            "Et tredje amerikansk hangarskib ankom til Mellemøsten."
-          ]
-        },
-        {
-          "url": "https://apnews.com/article/mideast-news-israel-gaza-iran-houthis-november-16-2026-8830a880160d69e2d7f1fd654207a121",
-          "verified": true,
-          "checked_at": "2026-11-17T07:00:00+01:00",
-          "excerpt": "Separately, a projectile struck a tanker attempting to transit through the strait, starting an engine room fire",
-          "supported_claims": [
-            "Et projektil ramte et tankskib og antændte maskinrummet."
-          ]
-        }
-      ]
+      "core_fact": "Et tredje hangarskib ankom, Iran meldte om miner, og britisk overvågning rapporterede projektilangreb.",
+      "evidence": {
+        "url": "https://apnews.com/article/mideast-news-israel-gaza-iran-houthis-november-16-2026-8830a880160d69e2d7f1fd654207a121",
+        "verified": true,
+        "checked_at": "2026-11-17T10:24:00+01:00",
+        "excerpt": "Another U.S. aircraft carrier has arrived in the Middle East, a U.S. official said Monday",
+        "supported_claims": [
+          "Et tredje amerikansk hangarskib ankom til regionen."
+        ]
+      }
     }
   ],
   "verification": {
     "status": "passed",
     "method": "independent_source_review",
-    "reviewed_text": "OLIEN FALDER, SELV OM TANKSKIBE RAMMES I HORMUZSTRÆDET\n\nMandag faldt Brent-olien 3,6 procent til 92,44 dollar pr. tønde. Tirsdag morgen fortsatte faldet til 91,66 dollar. Det skete, samtidig med at nye meldinger om beskadigede tankskibe understregede, at krigen mellem USA og Iran fortsat truer en af verdens vigtigste energiruter.\n\nForklaringen ligger i en ændring af markedets forventninger til den faktiske olieforsyning.\n\nDet Internationale Energiagentur, IEA, vurderer nu, at verdens olieudbud i fjerde kvartal vil overstige efterspørgslen med omkring 1,7 millioner tønder dagligt. Det er et markant skift fra forventningen om underskud. Eksporten fra Mellemøsten er kommet hurtigere tilbage, end efterspørgslen er steget.\n\nNår flere tønder når frem til køberne, mindskes frygten for akut mangel. Det kan sænke den risikopræmie, som handlere ellers kræver for at holde olieeksponering under en krig. Mandagens prisfald er observeret. At netop forventningen om overskud er hovedårsagen, er en fortolkning understøttet af markedskommentarer, ikke noget kursbevægelsen alene beviser.\n\nSikkerhedsrisikoen er langt fra forsvundet. Iran oplyser, at flere tankskibe er blevet ramt af miner. En britisk maritim myndighed har desuden rapporteret om brand efter et projektilangreb. Oplysningerne om de iranske mineangreb er ikke uafhængigt bekræftet.\n\nSamtidig ankom et tredje amerikansk hangarskib til Mellemøsten. Det viser, hvor skrøbelig genopretningen er. En ny afbrydelse af eksporten kan hurtigt ændre regnestykket igen.\n\nMin tese er derfor ikke, at krigen er blevet irrelevant for olieprisen. Den er, at markedet i øjeblikket vægter de tønder, der faktisk leveres, højere end risikoen for de tønder, der potentielt kan gå tabt.\n\nDet afgørende datapunkt bliver, om de genoprettede leverancer holder, og om lagrene fortsætter med at vokse. Hvis skibstrafikken igen bremses, kan risikopræmien vende tilbage. Hvis leverancerne holder, bliver et vedvarende højt prisniveau vanskeligere at begrunde alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet, 2020.",
+    "reviewed_text": "OLIEPRISEN FALDER, MENS ANGREBENE I HORMUZ FORTSÆTTER\n\nBrent-olien faldt tirsdag morgen til 91,62 dollar pr. tønde, et yderligere fald på 0,9 procent. Det skete efter et kraftigt fald mandag og trods nye meldinger om angreb på tankskibe i Hormuzstrædet.\n\nDet centrale spørgsmål er, hvorfor markedet reagerer med lavere priser, når den militære risiko fortsat er betydelig.\n\nForklaringen kan ligge i en ændret forventning til den fysiske olieforsyning. Det Internationale Energiagentur, IEA, vurderer, at verdens oliemarked igen vil få et udbudsoverskud i fjerde kvartal. Eksporten fra Mellemøsten er begyndt at komme tilbage hurtigere end den globale efterspørgsel.\n\nNår flere tønder faktisk når frem til køberne, bliver risikoen for akut mangel mindre. Dermed kan også den risikopræmie, der knytter sig til krigen mellem USA og Iran, falde. Prisfaldet er en observeret markedsbevægelse. At ændrede forsyningsforventninger er den vigtigste årsag, er en analytisk fortolkning, som stemmer med Reuters' gengivelse af markedets vurdering.\n\nMen situationen er ikke normaliseret. Ifølge analytikere citeret af Reuters er olietransporten gennem Hormuzstrædet stadig kun 49 procent af niveauet før krigen. Alternative eksportveje er desuden sårbare over for angreb og logistiske begrænsninger.\n\nMandag oplyste Iran, at miner havde beskadiget flere tankskibe. En britisk maritim overvågningsorganisation rapporterede samtidig, at et projektil havde antændt et tankskibs maskinrum. Et tredje amerikansk hangarskib ankom også til regionen.\n\nMin tese er derfor, at markedet for øjeblikket lægger større vægt på genoprettede leverancer end på risikoen for nye afbrydelser. Det er ikke det samme som, at risikoen er væk.\n\nDet afgørende bliver, om de faktiske olieleverancer fortsætter med at stige. Hvis skibstrafikken igen bremses, kan risikopræmien hurtigt vende tilbage. Hvis leverancerne holder, bliver det vanskeligere at begrunde høje oliepriser alene med krigen.\n\nArkivfoto: Amerikansk forsyningsskib i Hormuzstrædet i 2020.",
     "unresolved_claims": []
   },
   "editorial": {
     "status": "passed",
     "story_key": "hormuz-oil-surplus-november-2026",
-    "new_development": "Brent faldt 3,6 procent den 16. november, efter at markedet fokuserede på genoprettet eksport og IEA's forventning om olieoverskud trods fortsatte angreb.",
-    "mechanism": "Genoprettede olietransporter mindsker den forventede fysiske mangel og kan reducere krigsrisikopræmien, selv mens angreb på tankskibe fortsætter.",
-    "reader_relevance": "Brent-markedet reagerede med et fald til 92,44 dollar mandag og 91,66 dollar tirsdag morgen, men ny afbrydelse af Hormuztrafikken kan vende prisrisikoen.",
+    "new_development": "Brent faldt yderligere tirsdag morgen til 91,62 dollar, mens Iran meldte om minesprængninger og IEA ventede olieoverskud.",
+    "mechanism": "IEA's udsigt til et udbudsoverskud og genoprettede eksportstrømme kan reducere den risikopræmie, som krigen har lagt på Brent.",
+    "reader_relevance": "Brent-prisen på 91,62 dollar viser faldende markedspræmie for forsyningsrisiko, mens Hormuztrafik kun er 49 procent af førkrigsniveauet.",
     "image_relevance": "Et arkivfoto fra 2020 viser det konkrete amerikanske olieforsyningsskib USNS Leroy Grumman under passage af Hormuzstrædet og illustrerer den sårbare maritime rute.",
     "photo_file": "File:USNS Leroy Grumman (T-AO 195) transits the Strait of Hormuz 6470743.jpg"
   },
