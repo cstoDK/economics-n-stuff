@@ -1,0 +1,12 @@
+{
+  "status": "reserved",
+  "run_id": "44088210007",
+  "date": "2026-11-17",
+  "text_sha256": "3803464cbf87e43a3a4180b4a40f41feea14f8523af32772522af6dca0c65028",
+  "verified_text_sha256": "3803464cbf87e43a3a4180b4a40f41feea14f8523af32772522af6dca0c65028",
+  "editorial_sha256": "6fa43305a90b22f10ccfd136548ac4f6fe15b31cb864144a53b98c0b0bb5b3d5",
+  "photo": {
+    "title": "File:USNS Leroy Grumman (T-AO 195) transits the Strait of Hormuz 6470743.jpg",
+    "sha1": "76596b6530baf26bc461f26f221b9ff269f9000b"
+  }
+}
